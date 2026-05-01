@@ -12,5 +12,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
+
     protected $fillable = ['title', 'description', 'price', 'release_date']; // El atributo $fillable nos permite indicar qué campos de la tabla se pueden asignar masivamente. Esto es útil para evitar ataques de asignación masiva, donde un atacante puede enviar datos no deseados a través de un formulario y asignarlos a campos que no deberían ser asignados.
 }

@@ -51,7 +51,7 @@ class ProductosController extends Controller
         //---------------------------------------//
         $data = $request->validate([
             'title' => 'required|string|max:255',
-            /* 'description' => 'required|string', */
+            'description' => 'required|string',
             'price' => 'required|numeric|min:0',
             'release_date' => 'required|date',
         ]);

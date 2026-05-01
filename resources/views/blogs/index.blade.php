@@ -26,7 +26,9 @@
                     <td>{{ $blog->contenido_blog }}</td>
                     <td>{{ $blog->resumen }}</td>
                     <td>{{ $blog->fecha_publicacion }}</td>
-                    <td>comming soon...</td>
+                    <td>
+                        <a href="{{ url('/blogs/' . $blog->id)}}" class="btn btn-primary">Ver</a>
+                    </td>
                 </tr>
             @endforeach
     </table>
