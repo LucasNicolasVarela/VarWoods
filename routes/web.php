@@ -19,6 +19,10 @@ Route::get('productos/catalogo', [\App\Http\Controllers\ProductosController::cla
 Route::get('blogs/listado', [\App\Http\Controllers\BlogsController::class, 'index'])
     ->name('blogs.index');
 
+Route::get('blogs/{id}', [\App\Http\Controllers\BlogsController::class, 'show'])
+    ->whereNumber('id')
+    ->name('blogs.show');
+
 Route::get('productos/{id}', [\App\Http\Controllers\ProductosController::class, 'show'])
     ->whereNumber('id')
     ->name('productos.show');
