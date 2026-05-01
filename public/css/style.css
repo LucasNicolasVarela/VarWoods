@@ -1,0 +1,29 @@
+html, body, #app{
+    height: 100%;
+}
+
+#app{
+    display: grid;
+    grid-template-rows: 56px 1fr 100px;
+}
+
+.footer{
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(37, 37, 37);
+    color: white;
+}
+
+.navbar-collapse{
+    justify-content: right;
+}
+
+.footer p{
+    margin: 0;
+}
+
+.active{
+    font-weight: bold;
+}
