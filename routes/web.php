@@ -10,11 +10,12 @@ Route::get('/', [\App\Http\Controllers\HomeController::class, 'home'])
     ->name('home');
 
 Route::get('sobre-nosotros', [\App\Http\Controllers\HomeController::class, 'about'])
-    ->name('about');
+->name('about');
 
 
-Route::get('productos/catalogo', [\App\Http\Controllers\ProductosController::class, 'index'])
-    ->name('productos.index');
+/*-----------------------------
+    Rutas para el blog
+-----------------------------*/
 
 Route::get('blogs/listado', [\App\Http\Controllers\BlogsController::class, 'index'])
     ->name('blogs.index');
@@ -22,6 +23,20 @@ Route::get('blogs/listado', [\App\Http\Controllers\BlogsController::class, 'inde
 Route::get('blogs/{id}', [\App\Http\Controllers\BlogsController::class, 'show'])
     ->whereNumber('id')
     ->name('blogs.show');
+
+Route::get('/blog/nuevo', [\App\Http\Controllers\BlogsController::class, 'create'])
+    ->name('blogs.create');
+
+Route::post('/blog/nuevo', [\App\Http\Controllers\BlogsController::class, 'store'])  // METODO "store" traducido de "almacenar" o "guardar"
+    ->name('blogs.store');
+
+
+/*----------------------------
+    Rutas para el producto
+-----------------------------*/
+
+Route::get('productos/catalogo', [\App\Http\Controllers\ProductosController::class, 'index'])
+    ->name('productos.index');
 
 Route::get('productos/{id}', [\App\Http\Controllers\ProductosController::class, 'show'])
     ->whereNumber('id')
@@ -35,6 +50,7 @@ Route::get('productos/nuevo', [\App\Http\Controllers\ProductosController::class,
 // Para la creacion de una ruta de insercion vamos a crear una ruta con la misma URL que la del formulario pero que en vez de GET  utilice POST
 Route::post('productos/nuevo', [\App\Http\Controllers\ProductosController::class, 'store'])
     ->name('productos.store');
+
 
 // -------------------------------------------------------------------------------------------//
     /* Si entra por GET vamso al formulario, si entra por POST vamos a intentar de grabar */

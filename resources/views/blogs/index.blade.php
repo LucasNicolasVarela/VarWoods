@@ -7,6 +7,11 @@
     <h1>VarWoods - Blogs</h1>
     <p>Descubre las últimas noticias y artículos sobre muebles de madera.</p>
 
+    <div class="mb-3">
+        <a href="{{ route('blogs.create') }}" class="btn btn-success">Crear Nuevo Blog</a>
+    </div>
+
+
     <table class="table table-bordered table-striped">
         <thead>
             <tr>
@@ -27,7 +32,7 @@
                     <td>{{ $blog->resumen }}</td>
                     <td>{{ $blog->fecha_publicacion }}</td>
                     <td>
-                        <a href="{{ url('/blogs/' . $blog->id)}}" class="btn btn-primary">Ver</a>
+                        <a href="{{ route('blogs.show', ['id' => $blog->id]) }}" class="btn btn-primary">Ver</a>
                     </td>
                 </tr>
             @endforeach
