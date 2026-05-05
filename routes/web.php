@@ -30,6 +30,12 @@ Route::get('/blog/nuevo', [\App\Http\Controllers\BlogsController::class, 'create
 Route::post('/blog/nuevo', [\App\Http\Controllers\BlogsController::class, 'store'])  // METODO "store" traducido de "almacenar" o "guardar"
     ->name('blogs.store');
 
+Route::post('/blog/{id}/eliminar', [\App\Http\Controllers\BlogsController::class, 'destroy'])
+    ->whereNumber('id')
+    ->name('blogs.destroy');
+
+Route::get('/blog/{id}/eliminar', [\App\Http\Controllers\BlogsController::class, 'delete'])
+    ->name('blogs.delete');
 
 /*----------------------------
     Rutas para el producto
@@ -51,6 +57,12 @@ Route::get('productos/nuevo', [\App\Http\Controllers\ProductosController::class,
 Route::post('productos/nuevo', [\App\Http\Controllers\ProductosController::class, 'store'])
     ->name('productos.store');
 
+Route::post('productos/{id}/eliminar', [\App\Http\Controllers\ProductosController::class, 'destroy'])
+    ->whereNumber('id')
+    ->name('productos.destroy');
+
+Route::get('/productos/{id}/eliminar', [\App\Http\Controllers\ProductosController::class, 'delete'])
+    ->name('productos.delete');
 
 // -------------------------------------------------------------------------------------------//
     /* Si entra por GET vamso al formulario, si entra por POST vamos a intentar de grabar */

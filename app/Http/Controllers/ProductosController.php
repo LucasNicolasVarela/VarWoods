@@ -54,6 +54,17 @@ class ProductosController extends Controller
             'description' => 'required|string',
             'price' => 'required|numeric|min:0',
             'release_date' => 'required|date',
+        ],[
+            'title.required' => 'El título es obligatorio.',
+            'title.string' => 'El título debe contener texto.',
+            'title.max' => 'El título no puede tener más de 255 caracteres.',
+            'description.required' => 'La descripción es obligatoria.',
+            'description.string' => 'La descripción debe contener texto.',
+            'price.required' => 'El precio es obligatorio.',
+            'price.numeric' => 'El precio debe ser un número.',
+            'price.min' => 'El precio no puede ser negativo.',
+            'release_date.required' => 'La fecha de lanzamiento es obligatoria.',
+            'release_date.date' => 'Introduzca una fecha válida.',
         ]);
 
 
@@ -83,5 +94,20 @@ class ProductosController extends Controller
 
         // IMPORTANTE: toda pantalla que reciba datos por POST, después de procesarlos, debe redirigir a otra pantalla para evitar que si el usuario refresca la página, se vuelva a enviar el formulario y se dupliquen los datos en la base de datos. Para redirigir a otra pantalla, podemos usar el método redirect().
         return redirect()->route('productos.index'); /* Redirigimos a la pantalla de listado*/
+    }
+
+    public function destroy(int $id)
+    {
+        $product = Product::findOrFail($id);
+        $product->delete();
+
+        return redirect()->route('productos.index');
+    }
+
+    public function delete(int $id)
+    {
+        return view('productos.delete', [
+            'product' => Product::findOrFail($id),
+        ]);
     }
 }

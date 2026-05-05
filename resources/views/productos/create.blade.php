@@ -29,10 +29,15 @@
                 type="text"
                 name="title"
                 id="title"
-                class="form-control"
+                class="form-control @error ('title') is-invalid @enderror"
+                @error('title')
+                    aria-invalid="true"
+                    aria-errormessage="error_title"
+                @enderror
+                value="{{ old('title') }}"
             >
             @error('title')
-                <div class="alert text-danger mt-2">
+                <div class="text-danger mb-0" id="error_title">
                     {{ $message }}
                 </div>
             @endif
@@ -43,10 +48,15 @@
                 type="number"
                 name="price"
                 id="price"
-                class="form-control"
+                class="form-control @error ('price') is-invalid @enderror"
+                @error('price')
+                    aria-invalid="true"
+                    aria-errormessage="error_price"
+                @enderror
+                value="{{ old('price') }}"
             >
             @error('price')
-                <div class="alert text-danger mt-2">
+                <div class="text-danger mb-0" id="error_price">
                     {{ $message }}
                 </div>
             @endif
@@ -57,10 +67,15 @@
             type="date"
             name="release_date"
             id="release_date"
-            class="form-control"
+            class="form-control @error ('release_date') is-invalid @enderror"
+            @error('release_date')
+                aria-invalid="true"
+                aria-errormessage="error_release_date"
+            @enderror
+            value="{{ old('release_date') }}"
             >
             @error('release_date')
-                <div class="alert text-danger mt-2">
+                <div class="text-danger mb-0" id="error_release_date">
                     {{ $message }}
                 </div>
             @endif
@@ -70,10 +85,14 @@
             <textarea
             name="description"
             id="description"
-            class="form-control"
-            ></textarea>
+            class="form-control @error ('description') is-invalid @enderror"
             @error('description')
-                <div class="alert text-danger mt-2">
+                aria-invalid="true"
+                aria-errormessage="error_description"
+            @enderror
+            >{{ old('description') }}</textarea>
+            @error('description')
+                <div class="text-danger mb-0" id="error_description">
                     {{ $message }}
                 </div>
             @endif
@@ -84,10 +103,14 @@
                 type="file"
                 name="cover"
                 id="cover"
-                class="form-control"
+                class="form-control @error ('cover') is-invalid @enderror"
+                @error('cover')
+                    aria-invalid="true"
+                    aria-errormessage="error_cover"
+                @enderror
             >
             @error('cover')
-                <div class="alert text-danger mt-2">
+                <div class="text-danger mb-0" id="error_cover">
                     {{ $message }}
                 </div>
             @endif
@@ -97,10 +120,14 @@
             <textarea
             name="cover_description"
             id="cover_description"
-            class="form-control"
-            ></textarea>
+            class="form-control @error ('cover_description') is-invalid @enderror"
             @error('cover_description')
-                <div class="alert text-danger mt-2">
+                aria-invalid="true"
+                aria-errormessage="error_cover_description"
+            @enderror
+            >{{ old('cover_description') }}</textarea>
+            @error('cover_description')
+                <div class="text-danger mb-0" id="error_cover_description">
                     {{ $message }}
                 </div>
             @endif
