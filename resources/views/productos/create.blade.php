@@ -15,6 +15,13 @@
     <x-slot:title>Publicar Producto</x-slot>
     <h1 class="mb-3">Publicar un nuevo Producto</h1>
 
+    @if ($errors->any())
+        <div class="alert alert-danger mb-3">
+                <p>Por favor, verifique nuevamente los datos ingresados.</p>
+        </div>
+    @endif
+
+
     <form action="{{ route('productos.store') }}" method="POST">
         <div class="mb-2">
             <label for="title" class="form-label">Nombre del Producto</label>
@@ -25,7 +32,7 @@
                 class="form-control"
             >
             @error('title')
-                <div class="alert alert-danger mt-2">
+                <div class="alert text-danger mt-2">
                     {{ $message }}
                 </div>
             @endif
@@ -39,7 +46,7 @@
                 class="form-control"
             >
             @error('price')
-                <div class="alert alert-danger mt-2">
+                <div class="alert text-danger mt-2">
                     {{ $message }}
                 </div>
             @endif
@@ -53,7 +60,7 @@
             class="form-control"
             >
             @error('release_date')
-                <div class="alert alert-danger mt-2">
+                <div class="alert text-danger mt-2">
                     {{ $message }}
                 </div>
             @endif
@@ -66,7 +73,7 @@
             class="form-control"
             ></textarea>
             @error('description')
-                <div class="alert alert-danger mt-2">
+                <div class="alert text-danger mt-2">
                     {{ $message }}
                 </div>
             @endif
@@ -80,7 +87,7 @@
                 class="form-control"
             >
             @error('cover')
-                <div class="alert alert-danger mt-2">
+                <div class="alert text-danger mt-2">
                     {{ $message }}
                 </div>
             @endif
@@ -93,7 +100,7 @@
             class="form-control"
             ></textarea>
             @error('cover_description')
-                <div class="alert alert-danger mt-2">
+                <div class="alert text-danger mt-2">
                     {{ $message }}
                 </div>
             @endif
