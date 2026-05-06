@@ -114,4 +114,47 @@ class ProductosController extends Controller
             'product' => Product::findOrFail($id),
         ]);
     }
+
+    public function edit(int $id)
+    {
+        return view('productos.edit', [
+            'product' => Product::findOrFail($id),
+        ]);
+    }
+
+    public function update(Request $request, int $id)
+    {
+        $product = Product::findOrFail($id);
+
+        $data = $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'price' => 'required|numeric|min:0',
+            'release_date' => 'required|date',
+        ],[
+            'title.required' => 'El título es obligatorio.',
+            'title.string' => 'El título debe contener texto.',
+            'title.max' => 'El título no puede tener más de 255 caracteres.',
+            'description.required' => 'La descripción es obligatoria.',
+            'description.string' => 'La descripción debe contener texto.',
+            'price.required' => 'El precio es obligatorio.',
+            'price.numeric' => 'El precio debe ser un número.',
+            'price.min' => 'El precio no puede ser negativo.',
+            'release_date.required' => 'La fecha de lanzamiento es obligatoria.',
+            'release_date.date' => 'Introduzca una fecha válida.',
+        ]);
+
+        $data = $request->only([
+            'title',
+            'description',
+            'price',
+            'release_date',
+        ]);
+
+        $product = Product::findOrFail($id);
+        $product->update($data);
+        return redirect()
+        ->route('productos.index')
+        ->with('feedback.message', 'El producto <b>' . e($product->title) . '</b> ha sido actualizado correctamente.');
+    }
 }

@@ -37,6 +37,12 @@ Route::post('/blog/{id}/eliminar', [\App\Http\Controllers\BlogsController::class
 Route::get('/blog/{id}/eliminar', [\App\Http\Controllers\BlogsController::class, 'delete'])
     ->name('blogs.delete');
 
+Route::get('/blog/{id}/editar', [\App\Http\Controllers\BlogsController::class, 'edit'])
+    ->name('blogs.edit');
+
+Route::post('/blog/{id}/editar', [\App\Http\Controllers\BlogsController::class, 'update'])
+    ->name('blogs.update');
+
 /*----------------------------
     Rutas para el producto
 -----------------------------*/
@@ -63,6 +69,12 @@ Route::post('productos/{id}/eliminar', [\App\Http\Controllers\ProductosControlle
 
 Route::get('/productos/{id}/eliminar', [\App\Http\Controllers\ProductosController::class, 'delete'])
     ->name('productos.delete');
+
+Route::get('/productos/{id}/editar', [\App\Http\Controllers\ProductosController::class, 'edit'])
+    ->name('productos.edit');
+
+Route::post('/productos/{id}/editar', [\App\Http\Controllers\ProductosController::class, 'update'])
+    ->name('productos.update');
 
 // -------------------------------------------------------------------------------------------//
     /* Si entra por GET vamso al formulario, si entra por POST vamos a intentar de grabar */
