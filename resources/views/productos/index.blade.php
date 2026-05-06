@@ -39,6 +39,7 @@
                 <td>
                     <div class="d-flex gap-2">
                         <a href="{{route('productos.show', ['id'=> $product->id]) }}" class="btn btn-primary">Detalles</a>
+                        <a href="{{ route('productos.edit', ['id' => $product->id]) }}" class="btn btn-warning">Editar</a>
                         <a href="{{ route('productos.delete', ['id' => $product->id]) }}" class="btn btn-danger">Eliminar</a>
                         {{-- <form action="{{ route('productos.destroy', ['id' => $product->id]) }}" method="POST">
                             <button type="submit" class="btn btn-danger">Eliminar</button>
