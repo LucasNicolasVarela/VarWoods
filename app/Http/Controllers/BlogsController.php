@@ -77,7 +77,9 @@ class BlogsController extends Controller
 
         $blog = Blog::create($data);
 
-        return redirect()->route('blogs.index');
+        return redirect()
+        ->route('blogs.index')
+        ->with('feedback.message', 'El blog <b>' . e($blog->title) . '</b> ha sido creado correctamente.');
     }
 
     public function destroy(int $id)
@@ -85,7 +87,9 @@ class BlogsController extends Controller
         $blog = Blog::findOrFail($id);
         $blog->delete();
 
-        return redirect()->route('blogs.index');
+        return redirect()
+        ->route('blogs.index')
+        ->with('feedback.message', 'El blog <b>' . e($blog->title) . '</b> ha sido eliminado correctamente.');
     }
 
     public function delete(int $id)

@@ -93,7 +93,9 @@ class ProductosController extends Controller
 
 
         // IMPORTANTE: toda pantalla que reciba datos por POST, después de procesarlos, debe redirigir a otra pantalla para evitar que si el usuario refresca la página, se vuelva a enviar el formulario y se dupliquen los datos en la base de datos. Para redirigir a otra pantalla, podemos usar el método redirect().
-        return redirect()->route('productos.index'); /* Redirigimos a la pantalla de listado*/
+        return redirect()
+        ->route('productos.index') /* Redirigimos a la pantalla de listado*/
+        ->with('feedback.message', 'El producto <b>' . e($product->title) . '</b> ha sido creado correctamente.');
     }
 
     public function destroy(int $id)
@@ -101,7 +103,9 @@ class ProductosController extends Controller
         $product = Product::findOrFail($id);
         $product->delete();
 
-        return redirect()->route('productos.index');
+        return redirect()
+        ->route('productos.index')
+        ->with('feedback.message', 'El producto <b>' . e($product->title) . '</b> ha sido eliminado correctamente.');
     }
 
     public function delete(int $id)
