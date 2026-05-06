@@ -23,10 +23,15 @@
                 type="text"
                 name="title"
                 id="title"
-                class="form-control"
+                class="form-control @error ('title') is-invalid @enderror"
+                @error('title')
+                    aria-invalid="true"
+                    aria-errormessage="error_title"
+                @enderror
+                value="{{ old('title') }}"
             >
             @error('title')
-                <div class="alert alert-danger mt-2">
+                <div class="text-danger mb-0" id="error_title">
                     {{ $message }}
                 </div>
             @endif
@@ -37,10 +42,15 @@
                 type="text"
                 name="category_name"
                 id="category_name"
-                class="form-control"
+                class="form-control @error ('category_name') is-invalid @enderror"
+                @error('category_name')
+                    aria-invalid="true"
+                    aria-errormessage="error_category_name"
+                @enderror
+                value="{{ old('category_name') }}"
             >
             @error('category_name')
-                <div class="alert alert-danger mt-2">
+                <div class="text-danger mb-0" id="error_category_name">
                     {{ $message }}
                 </div>
             @endif
@@ -51,10 +61,15 @@
                 type="text"
                 name="resumen"
                 id="resumen"
-                class="form-control"
+                class="form-control @error ('resumen') is-invalid @enderror"
+                @error('resumen')
+                    aria-invalid="true"
+                    aria-errormessage="error_resumen"
+                @enderror
+                value="{{ old('resumen') }}"
             >
             @error('resumen')
-                <div class="alert alert-danger mt-2">
+                <div class="text-danger mb-0" id="error_resumen">
                     {{ $message }}
                 </div>
             @endif
@@ -64,11 +79,15 @@
             <textarea
                 name="contenido_blog"
                 id="contenido_blog"
-                class="form-control"
+                class="form-control @error ('contenido_blog') is-invalid @enderror"
                 rows="5"
-            ></textarea>
+                @error('contenido_blog')
+                    aria-invalid="true"
+                    aria-errormessage="error_contenido_blog"
+                @enderror
+            >{{ old('contenido_blog') }}</textarea>
             @error('contenido_blog')
-                <div class="alert alert-danger mt-2">
+                <div class="text-danger mb-0" id="error_contenido_blog">
                     {{ $message }}
                 </div>
             @endif
@@ -79,8 +98,18 @@
                 type="date"
                 name="fecha_publicacion"
                 id="fecha_publicacion"
-                class="form-control"
+                class="form-control @error ('fecha_publicacion') is-invalid @enderror"
+                value="{{ old('fecha_publicacion') }}"
+                @error('fecha_publicacion')
+                    aria-invalid="true"
+                    aria-errormessage="error_fecha_publicacion"
+                @enderror
             >
+            @error('fecha_publicacion')
+                <div class="text-danger mb-0" id="error_fecha_publicacion">
+                    {{ $message }}
+                </div>
+            @endif
         </div>
         <button type="submit" class="btn btn-primary">Publicar</button>
     </form>

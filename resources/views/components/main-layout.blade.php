@@ -35,6 +35,15 @@
                 </div>
             </nav>
             <main class="container py-2">
+
+                {{-- Se agrega el contenido flasheado si este existe --}}
+                @if (session()->has('feedback.message'))
+                    <div class="alert alert-success">
+                        {!! session()->get('feedback.message') !!}
+                    </div>
+                @endif
+
+                {{-- Se agrega el contenido del slot --}}
                 {{$slot}}
             </main>
             <footer class="footer">
