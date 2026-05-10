@@ -14,9 +14,11 @@
     <h1>Catálogo de Productos</h1>
     <p>Explora nuestra amplia selección de productos de madera de alta calidad.</p>
 
-    <div class="mb-3">
-        <a href="{{ route('productos.create') }}" class="btn btn-success">Agregar Producto</a>
-    </div>
+    @auth
+        <div class="mb-3">
+            <a href="{{ route('productos.create') }}" class="btn btn-success">Agregar Producto</a>
+        </div>
+    @endauth
 
     <table class="table table-bordered table-striped">
         <thead>
@@ -39,11 +41,14 @@
                 <td>
                     <div class="d-flex gap-2">
                         <a href="{{route('productos.show', ['id'=> $product->id]) }}" class="btn btn-primary">Detalles</a>
-                        <a href="{{ route('productos.edit', ['id' => $product->id]) }}" class="btn btn-warning">Editar</a>
-                        <a href="{{ route('productos.delete', ['id' => $product->id]) }}" class="btn btn-danger">Eliminar</a>
-                        {{-- <form action="{{ route('productos.destroy', ['id' => $product->id]) }}" method="POST">
-                            <button type="submit" class="btn btn-danger">Eliminar</button>
-                        </form> --}}
+
+                        @auth
+                            <a href="{{ route('productos.edit', ['id' => $product->id]) }}" class="btn btn-warning">Editar</a>
+                            <a href="{{ route('productos.delete', ['id' => $product->id]) }}" class="btn btn-danger">Eliminar</a>
+                            {{-- <form action="{{ route('productos.destroy', ['id' => $product->id]) }}" method="POST">
+                                <button type="submit" class="btn btn-danger">Eliminar</button>
+                            </form> --}}
+                        @endauth
                     </div>
                 </td>
             </tr>

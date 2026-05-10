@@ -7,9 +7,11 @@
     <h1>VarWoods - Blogs</h1>
     <p>Descubre las últimas noticias y artículos sobre muebles de madera.</p>
 
-    <div class="mb-3">
-        <a href="{{ route('blogs.create') }}" class="btn btn-success">Crear Nuevo Blog</a>
-    </div>
+    @auth
+        <div class="mb-3">
+            <a href="{{ route('blogs.create') }}" class="btn btn-success">Crear Nuevo Blog</a>
+        </div>
+    @endauth
 
 
     <table class="table table-bordered table-striped">
@@ -34,11 +36,13 @@
                     <td>
                         <div class="d-flex gap-2">
                             <a href="{{ route('blogs.show', ['id' => $blog->id]) }}" class="btn btn-primary">Ver</a>
-                            <a href="{{ route('blogs.edit', ['id' => $blog->id]) }}" class="btn btn-warning">Editar</a>
-                            <a href="{{ route('blogs.delete', ['id' => $blog->id]) }}" class="btn btn-danger">Eliminar</a>
-                           {{--  <form action="{{ route('blogs.destroy', ['id' => $blog->id]) }}" method="POST">
-                                <button type="submit" class="btn btn-danger">Eliminar</button>
-                            </form> --}}
+                            @auth
+                                <a href="{{ route('blogs.edit', ['id' => $blog->id]) }}" class="btn btn-warning">Editar</a>
+                                <a href="{{ route('blogs.delete', ['id' => $blog->id]) }}" class="btn btn-danger">Eliminar</a>
+                                {{--  <form action="{{ route('blogs.destroy', ['id' => $blog->id]) }}" method="POST">
+                                    <button type="submit" class="btn btn-danger">Eliminar</button>
+                                </form> --}}
+                            @endauth
                         </div>
                     </td>
                 </tr>
