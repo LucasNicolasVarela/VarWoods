@@ -30,6 +30,21 @@
                             <li class="nav-item">
                                 <x-nav-link to="blogs.index">Blogs</x-nav-link>
                             </li>
+
+                            {{-- @if(auth()->check()) --}}  {{-- // ----> Se puede usar @auth y finalizar con @endauth para simplificar esta lógica --}}
+
+                            @auth
+                                <li class="nav-item">
+                                    <form action="{{ route('logout') }}" method="post">
+                                        <button type="submit" class="nav-link btn btn-link"> {{ auth()->user()->name }}(Cerrar Sesión)</button>
+                                    </form>
+                                </li>
+                            @else
+                                <li class="nav-item">
+                                    <x-nav-link to="login.show">Iniciar Sesión</x-nav-link>
+                                </li>
+                            {{-- @endif --}}
+                            @endauth
                         </ul>
                     </div>
                 </div>

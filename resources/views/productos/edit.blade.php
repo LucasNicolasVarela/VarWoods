@@ -50,6 +50,7 @@
                 name="price"
                 id="price"
                 class="form-control @error ('price') is-invalid @enderror"
+                step="0.01"
                 @error('price')
                     aria-invalid="true"
                     aria-errormessage="error_price"
