@@ -26,12 +26,16 @@ class Product extends Model
 
     public function price(): Attribute{
         return Attribute::make(
-            function($value){
+            /*get: function($value){
                 return $value / 100; // Esto es para convertir el precio de centavos a dólares antes de mostrarlo en la vista.
             },
-            function($value){
+            set: function($value){
                 return $value * 100; // Esto es para convertir el precio de dólares a centavos antes de guardarlo en la base de datos.
-            }
+            } */
+
+            // Usando funciones flecha para simplificar el código:
+            get: fn($value) => $value / 100, // Esto es para convertir el precio de centavos a dólares antes de mostrarlo en la vista.
+            set: fn($value) => $value * 100 // Esto es para convertir el
         );
     }
 }

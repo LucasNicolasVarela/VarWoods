@@ -13,6 +13,18 @@ Route::get('sobre-nosotros', [\App\Http\Controllers\HomeController::class, 'abou
 ->name('about');
 
 
+/*------------------------------------------------
+    Rutas para el login / autenticacion y logout
+--------------------------------------------------*/
+Route::get('iniciar-sesion', [\App\Http\Controllers\AuthController::class, 'show'])
+    ->name('login.show');
+
+Route::post('iniciar-sesion', [\App\Http\Controllers\AuthController::class, 'process'])
+    ->name('login.process');
+
+Route::post('cerrar-sesion', [\App\Http\Controllers\AuthController::class, 'logout'])
+    ->name('logout');
+
 /*-----------------------------
     Rutas para el blog
 -----------------------------*/
