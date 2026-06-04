@@ -76,10 +76,10 @@ html, body, #app{
 ========================= */
 
 .footer {
-    background-color: #f5f5f5;
+    background-color: #1d1d1d;
     border-top: 1px solid #dddddd;
     padding-top: 50px;
-    color: #333;
+    color: #ffffff;
 }
 
 .footer-container {
@@ -112,7 +112,7 @@ html, body, #app{
 .footer-brand-text {
     font-size: 0.95rem;
     line-height: 1.6;
-    color: #555;
+    color: #8d8d8d;
     margin: 0;
 }
 
@@ -130,7 +130,7 @@ html, body, #app{
 /* LINKS */
 .footer-links a {
     text-decoration: none;
-    color: #222;
+    color: #ffffff;
     font-size: 0.95rem;
 
     transition: color 0.2s ease;
@@ -154,7 +154,7 @@ html, body, #app{
 .footer-bottom p {
     margin: 0;
     font-size: 0.9rem;
-    color: #666;
+    color: #bebebe;
 }
 
 /* =========================

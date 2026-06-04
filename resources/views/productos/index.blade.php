@@ -20,40 +20,60 @@
         </div>
     @endauth
 
-    <table class="table table-bordered table-striped">
-        <thead>
-            <tr>
-                <th>Nombre</th>
-                <th>Precio</th>
-                <th>Descripción</th>
-                <th>Partida</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-
+    <div class="row g-4">
         @foreach($products as $product)
-            <tr>
-                <td> {{ $product->title }} </td>
-                <td> ${{ $product->price }} </td>
-                <td> {{ $product->description }} </td>
-                <td> {{ $product->release_date }} </td>
-                <td>
-                    <div class="d-flex gap-2">
-                        <a href="{{route('productos.show', ['id'=> $product->id]) }}" class="btn btn-primary">Detalles</a>
+            <div class="col-md-4 col-lg-3">
+                <div class="card h-100 shadow-sm">
 
-                        @auth
-                            <a href="{{ route('productos.edit', ['id' => $product->id]) }}" class="btn btn-warning">Editar</a>
-                            <a href="{{ route('productos.delete', ['id' => $product->id]) }}" class="btn btn-danger">Eliminar</a>
-                            {{-- <form action="{{ route('productos.destroy', ['id' => $product->id]) }}" method="POST">
-                                <button type="submit" class="btn btn-danger">Eliminar</button>
-                            </form> --}}
-                        @endauth
+                    {{-- Imagen temporal --}}
+                    <img
+                        src="https://placehold.co/600x400?text=Sin+Imagen"
+                        class="card-img-top"
+                        alt="{{ $product->title }}"
+                    >
+
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">
+                            {{ $product->title }}
+                        </h5>
+
+                        <p class="card-text text-success fw-bold fs-5">
+                            ${{ $product->price }}
+                        </p>
+
+                        <p class="card-text text-muted">
+                            {{ Str::limit($product->description, 80) }}
+                        </p>
+
+                        <div class="mt-auto">
+                            <a
+                                href="{{ route('productos.show', ['id' => $product->id]) }}"
+                                class="btn btn-primary w-100 mb-2"
+                            >
+                                Ver producto
+                            </a>
+
+                            @auth
+                                <div class="d-flex gap-2">
+                                    <a
+                                        href="{{ route('productos.edit', ['id' => $product->id]) }}"
+                                        class="btn btn-warning flex-fill"
+                                    >
+                                        Editar
+                                    </a>
+
+                                    <a
+                                        href="{{ route('productos.delete', ['id' => $product->id]) }}"
+                                        class="btn btn-danger flex-fill"
+                                    >
+                                        Eliminar
+                                    </a>
+                                </div>
+                            @endauth
+                        </div>
                     </div>
-                </td>
-            </tr>
+                </div>
+            </div>
         @endforeach
-
-        </tbody>
-    </table>
+    </div>
 </x-main-layout>

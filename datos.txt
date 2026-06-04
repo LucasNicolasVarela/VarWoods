@@ -1,0 +1,11 @@
+Carácter de entrega 1er parcial
+
+apellido y nombre: Varela Lucas
+Carrera: Diseño y Programación Web
+materia: Portales y Comercio Electrónico 
+docente: Santiago Gallino 
+cuatrimestre: 3er cuatrimestre 
+año: 2026 
+turno: Noche 
+comisión: DWN4AV 
+
