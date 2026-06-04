@@ -34,7 +34,7 @@
 
                     <div class="card-body d-flex flex-column">
                         <h5 class="card-title">
-                             {{ $product->title }}
+                            {{ $product->title }}
                         </h5>
 
                         <p class="card-text text-success fw-bold fs-5">
