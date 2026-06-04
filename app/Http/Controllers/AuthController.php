@@ -26,7 +26,8 @@ class AuthController extends Controller
             return redirect()
                 ->route('login.show')
                 ->withInput()
-                ->with('feedback.message', 'Credenciales incorrectas, por favor intente de nuevo.');
+                ->with('feedback.message', 'Credenciales incorrectas, por favor intente de nuevo.')
+                ->with('feedback.type', 'danger');
         }
 
         // Si la autenticación es correcta, redirigir al usuario al listado de produtos
