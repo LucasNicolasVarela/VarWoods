@@ -25,12 +25,22 @@
             <div class="col-md-4 col-lg-3">
                 <div class="card h-100 shadow-sm">
 
-                    {{-- Imagen temporal --}}
-                    <img
-                        src="https://placehold.co/600x400?text=Sin+Imagen"
-                        class="card-img-top"
-                        alt="{{ $product->title }}"
-                    >
+                    {{-- tarjetas con imagenes --}}
+                    @if($product->img !== null && \Storage::exists($product->img))
+                        <img
+                            src="{{ \Storage::url($product->img) }}"
+                            class="card-img-top"
+                            alt="{{ $product->img_description }}"
+                            style="height: 220px; object-fit: cover;"
+                        >
+                    @else
+                        <img
+                            src="https://placehold.co/600x400?text=Sin+Imagen"
+                            class="card-img-top"
+                            alt="Sin imagen"
+                            style="height: 220px; object-fit: cover;"
+                        >
+                    @endif
 
                     <div class="card-body d-flex flex-column">
                         <h5 class="card-title">
