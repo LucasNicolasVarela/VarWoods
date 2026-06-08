@@ -18,7 +18,7 @@ class Product extends Model
 
     protected $table = 'product'; // Esto es para indicarle a Laravel el nombre de la tabla que corresponde a este modelo, en caso de que no siga la convencion.
 
-    protected $fillable = ['title', 'description', 'price', 'release_date']; // El atributo $fillable nos permite indicar qué campos de la tabla se pueden asignar masivamente. Esto es útil para evitar ataques de asignación masiva, donde un atacante puede enviar datos no deseados a través de un formulario y asignarlos a campos que no deberían ser asignados.
+    protected $fillable = ['title', 'description', 'price', 'release_date', 'img', 'img_description']; // El atributo $fillable nos permite indicar qué campos de la tabla se pueden asignar masivamente. Esto es útil para evitar ataques de asignación masiva, donde un atacante puede enviar datos no deseados a través de un formulario y asignarlos a campos que no deberían ser asignados.
 
 
     /********************************* */

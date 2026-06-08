@@ -23,7 +23,7 @@
     @endif
 
 
-    <form action="{{ route('productos.update', ['id' => $product->id]) }}" method="POST">
+    <form action="{{ route('productos.update', ['id' => $product->id]) }}" method="POST" enctype="multipart/form-data">
         <div class="mb-2">
             <label for="title" class="form-label">Nombre del Producto</label>
             <input
