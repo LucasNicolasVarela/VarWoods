@@ -88,9 +88,21 @@ class ProductosController extends Controller
         // --------------------------------------------------
             /* Forma 2 de insertar productos en la BD */
         // --------------------------------------------------
+
+        // --------------------------------------------------
+            /* Upload de la imagen y descripcion */
+        // --------------------------------------------------
+        if($request->hasFile('img')){
+            $filename = $request->file('img')->store('imgs') ;
+            $data['img'] = $filename;
+        }
+
+        $data['img_description'] = $request->img_description;
+
+        // --------------------------------------------------
+
+
         $product = Product::create($data);
-
-
 
         // IMPORTANTE: toda pantalla que reciba datos por POST, después de procesarlos, debe redirigir a otra pantalla para evitar que si el usuario refresca la página, se vuelva a enviar el formulario y se dupliquen los datos en la base de datos. Para redirigir a otra pantalla, podemos usar el método redirect().
         return redirect()
@@ -149,6 +161,7 @@ class ProductosController extends Controller
             'description',
             'price',
             'release_date',
+            'img_description',
         ]);
 
         $product = Product::findOrFail($id);

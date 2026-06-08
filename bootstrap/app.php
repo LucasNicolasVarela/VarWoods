@@ -16,6 +16,7 @@ return Application::configure(basePath: dirname(__DIR__))
         /* $middleware->redirectGuestsTo('/iniciar-sesion'); */ // Esta forma es pasando directamente la URL
         $middleware->redirectGuestsTo( function() {
             Session::flash('feedback.message', 'Debes iniciar sesión para acceder a esta página.'); // Esto es para mostrar un mensaje de feedback al usuario cuando intente acceder a una ruta protegida sin estar autenticado.
+            Session::flash('feedback.type', 'danger'); // Esto es para mostrar un mensaje de feedback al usuario cuando intente acceder a una ruta protegida sin estar autenticado.
             return route('login.show');
         });
 
