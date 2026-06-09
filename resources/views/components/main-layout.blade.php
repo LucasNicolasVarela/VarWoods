@@ -36,9 +36,6 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <x-nav-link to="about">Sobre Nosotros</x-nav-link>
-                            </li>
-                            <li class="nav-item">
                                 <x-nav-link to="productos.index">Productos</x-nav-link>
                             </li>
                             <li class="nav-item">
