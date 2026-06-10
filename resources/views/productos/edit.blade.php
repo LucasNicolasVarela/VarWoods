@@ -99,37 +99,57 @@
                 </div>
             @endif
         </div>
+
         <div class="mb-2">
-            <label for="cover" class="form-label">Imagen</label>
+            @if ($product->img !== null && \Storage::exists($product->img))
+            <span>Imagen actual</span>
+                <div class="my-2">
+                    <img
+                        src="{{ \Storage::url($product->img) }}"
+                        alt="{{ $product->img_description }}"
+                        style="max-width: 300px; height: auto;"
+                    >
+                </div>
+            @else
+                <span>No se han cargado imagenes en este producto</span>
+            @endif
+        </div>
+
+        <div class="mb-2">
+            <label for="img" class="form-label">Imagen</label>
             <input
                 type="file"
-                name="cover"
-                id="cover"
-                class="form-control @error ('cover') is-invalid @enderror"
-                @error('cover')
+                name="img"
+                id="img"
+                class="form-control @error ('img') is-invalid @enderror"
+                aria-describedby="help_img"
+                @error('img')
                     aria-invalid="true"
-                    aria-errormessage="error_cover"
+                    aria-errormessage="error_img"
                 @enderror
             >
-            @error('cover')
-                <div class="text-danger mb-0" id="error_cover">
+
+            <div id="help_img">Si desea mantener la imagen actual, deje este campo vacío.</div>
+
+            @error('img')
+                <div class="text-danger mb-0" id="error_img">
                     {{ $message }}
                 </div>
             @endif
         </div>
         <div class="mb-2">
-            <label for="cover_description" class="form-label">Descripción de la Imagen</label>
+            <label for="img_description" class="form-label">Descripción de la Imagen</label>
             <textarea
-            name="cover_description"
-            id="cover_description"
-            class="form-control @error ('cover_description') is-invalid @enderror"
-            @error('cover_description')
+            name="img_description"
+            id="img_description"
+            class="form-control @error ('img_description') is-invalid @enderror"
+            @error('img_description')
                 aria-invalid="true"
-                aria-errormessage="error_cover_description"
+                aria-errormessage="error_img_description"
             @enderror
-            >{{ old('cover_description', $product->cover_description) }}</textarea>
-            @error('cover_description')
-                <div class="text-danger mb-0" id="error_cover_description">
+            >{{ old('img_description', $product->img_description) }}</textarea>
+            @error('img_description')
+                <div class="text-danger mb-0" id="error_img_description">
                     {{ $message }}
                 </div>
             @endif

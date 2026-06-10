@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Support\Facades\Storage;
 
 class ProductosController extends Controller
 {
@@ -115,6 +115,12 @@ class ProductosController extends Controller
         $product = Product::findOrFail($id);
         $product->delete();
 
+        // Si el producto tiene una imagen asociada, la eliminamos del almacenamiento cuando se elimina el producto.
+        if(isset($product->img) && $product->img !== null && Storage::exists($product->img)){
+            Storage::delete($product->img);
+        }
+
+
         return redirect()
         ->route('productos.index')
         ->with('feedback.message', 'El producto <b>' . e($product->title) . '</b> ha sido eliminado correctamente.');
@@ -163,6 +169,22 @@ class ProductosController extends Controller
             'release_date',
             'img_description',
         ]);
+
+        // --------------------------------------------------
+            /* Upload de la imagen y descripcion */
+        // --------------------------------------------------
+        if($request->hasFile('img')){
+            $filename = $request->file('img')->store('imgs') ;
+            $data['img'] = $filename;
+            $oldImage = $product->img; // Guardamos el nombre de la imagen antigua para eliminarla después de actualizar el producto.
+        }
+
+        $product->update($data); // El siguiente paso es actualizar el producto en la base de datos con la nueva imagen
+
+        if(isset($oldImage) && $oldImage !== null && Storage::exists($oldImage)){
+            Storage::delete($oldImage);
+        }
+
 
         $product = Product::findOrFail($id);
         $product->update($data);
