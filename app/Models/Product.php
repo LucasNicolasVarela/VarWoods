@@ -40,4 +40,19 @@ class Product extends Model
             set: fn($value) => $value * 100 // Esto es para convertir el
         );
     }
+
+    /********************************* */
+         /* Relaciones de Eloquent */
+    /********************************* */
+    // Esto es importante: Las relaciones de Eloquent nos permiten definir las relaciones entre los modelos de nuestra aplicación.
+    // Acá vamos a hacer la relacion parados sobre la tabla referenciante para lo que serían las categorías del producto
+    // A tener en cuenta que necesitamos agregar algunos valores
+    // 1 - Obligatorio String con el nombre de la clase del modelo de la tabla relacionada
+    // 2 - Opcional String con el nombre de la clave foránea
+    // 3 - Opcional String con el nombre de la clave primaria de la tabla relacionada En este caso es el id de Categories.
+
+    public function category(){
+        return $this->belongsTo(Categories::class, 'category_fk', 'category_id');
+    }
+
 }

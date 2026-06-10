@@ -21,6 +21,7 @@ class ProductSeeder extends Seeder
         DB::table('product')->insert([
             [
                 'id' => 1,
+                'category_fk' => 1,
                 'title' => 'Mesas de madera seleccionada',
                 'price' => 400000,
                 'release_date' => '2024-01-01',
@@ -30,6 +31,7 @@ class ProductSeeder extends Seeder
             ],
             [
                 'id' => 2,
+                'category_fk' => 4,
                 'title' => 'Estanterías estilo industrial',
                 'price' => 230000,
                 'release_date' => '2026-01-01',
@@ -39,6 +41,7 @@ class ProductSeeder extends Seeder
             ],
             [
                 'id' => 3,
+                'category_fk' => 2,
                 'title' => 'Sillas de madera de álamo',
                 'price' => 95000,
                 'release_date' => '2025-01-06',
@@ -48,6 +51,7 @@ class ProductSeeder extends Seeder
             ],
             [
                 'id' => 4,
+                'category_fk' => 2,
                 'title' => 'Escritorios de madera petiribí',
                 'price' => 350000,
                 'release_date' => '2026-01-03',

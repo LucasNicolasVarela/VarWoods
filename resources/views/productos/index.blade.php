@@ -51,6 +51,10 @@
                             ${{ $product->price }}
                         </p>
 
+                        <p class="card-text text-muted fw-bold fs-5">
+                            {{ $product->category->name }}
+                        </p>
+
                         <p class="card-text text-muted">
                             {{ Str::limit($product->description, 80) }}
                         </p>
