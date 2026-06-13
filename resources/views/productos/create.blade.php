@@ -2,6 +2,7 @@
 <?PHP
 /**
  * @var Illuminate\Support\ViewErrorBag $errors
+ * @var \App\Models\Category[] | \Illuminate\Database\Eloquent\Collection $categories
 */
 
 /* ----------
@@ -81,6 +82,32 @@
                 </div>
             @endif
         </div>
+
+        <div class="mb-2">
+            <label for="category_fk" class="form-label">Categoría</label>
+            <select
+                name="category_fk"
+                id="category_fk"
+                class="form-select @error ('category_fk') is-invalid @enderror"
+                @error('category_fk')
+                    aria-invalid="true"
+                    aria-errormessage="error_category_fk"
+                @enderror
+            >
+                <option value="">Seleccione una categoría</option>
+                @foreach ($categories as $category)
+                    <option value="{{ $category->category_id }}" {{ old('category_fk') == $category->category_id ? 'selected' : '' }}>
+                        {{ $category->name }}
+                    </option>
+                @endforeach
+            </select>
+            @error('category_fk')
+                <div class="text-danger mb-0" id="error_category_fk">
+                    {{ $message }}
+                </div>
+            @endif
+        </div>
+
         <div class="mb-2">
             <label for="description" class="form-label">Descripción</label>
             <textarea

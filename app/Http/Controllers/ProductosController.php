@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Categories;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -15,9 +16,8 @@ class ProductosController extends Controller
         /* $products = DB::table('product')->get(); */ // El método get() nos devuelve una colección con los resultados de la consulta.
         /* dd($products); */ // El método dd() nos muestra el contenido de la variable y detiene la ejecución del programa.
 
-        $products = Product::all(); // El método all() nos devuelve una colección con todos los registros de la tabla product.
+        $products = Product::with('category')->get(); // Cargamos también la categoría para evitar consultas innecesarias.
         /* dd($products); */ // El método dd() nos muestra el contenido de la variable y detiene la ejecución del programa.
-
 
         // El método view() nos permite renderizar una vista. Recibe dos parámetros: el nombre de la vista y un array con los datos que queremos pasarle a la vista.
         return view('productos.index', [
@@ -32,9 +32,7 @@ class ProductosController extends Controller
         // El método find() nos devuelve el registro con el id especificado o null si no lo encuentra.
         //findOrFail nos devuelve el registro con el id especificado o lanza una excepción si no lo encuentra. Es necesario por que si llega solo con Null a la vista va a tirar un error al intentar acceder a las propiedades del producto.
 
-        $product = Product::findOrFail($id);
-
-
+        $product = Product::with('category')->findOrFail($id);
 
         return view('productos.show', [
             'product' => $product,
@@ -42,7 +40,9 @@ class ProductosController extends Controller
     }
 
     public function create(){
-        return view('productos.create');
+        return view('productos.create', [
+            'categories' => Categories::all(),
+        ]);
     }
 
     public function store(Request $request){
@@ -54,6 +54,7 @@ class ProductosController extends Controller
             'description' => 'required|string',
             'price' => 'required|numeric|min:0',
             'release_date' => 'required|date',
+            'category_fk' => 'required|exists:categories,category_id',
         ],[
             'title.required' => 'El título es obligatorio.',
             'title.string' => 'El título debe contener texto.',
@@ -65,15 +66,15 @@ class ProductosController extends Controller
             'price.min' => 'El precio no puede ser negativo.',
             'release_date.required' => 'La fecha de lanzamiento es obligatoria.',
             'release_date.date' => 'Introduzca una fecha válida.',
+            'category_fk.required' => 'La categoría es obligatoria.',
+            'category_fk.exists' => 'La categoría seleccionada no es válida.',
         ]);
-
 
         /* dd($request); */   /* ----> probamos como llegan los datos */
         /* $data = $request->except(['cover', 'cover_description']); */ /* except() nos devuelve un array con todos los datos excepto los que le pasamos como parámetro. */
 
         /* $data = $request->only(['title', 'description', 'price', 'release_date']); */ /* only() nos devuelve un array con solo los datos que le pasamos como parámetro. */   /* ----> comentado por que la validacion ya lo hace antes */
         /* dd($data); */
-
 
         // --------------------------------------------------
             /* Forma 1 de insertar productos en la BD */
@@ -93,14 +94,13 @@ class ProductosController extends Controller
             /* Upload de la imagen y descripcion */
         // --------------------------------------------------
         if($request->hasFile('img')){
-            $filename = $request->file('img')->store('imgs') ;
+            $filename = $request->file('img')->store('imgs');
             $data['img'] = $filename;
         }
 
         $data['img_description'] = $request->img_description;
 
         // --------------------------------------------------
-
 
         $product = Product::create($data);
 
@@ -120,7 +120,6 @@ class ProductosController extends Controller
             Storage::delete($product->img);
         }
 
-
         return redirect()
         ->route('productos.index')
         ->with('feedback.message', 'El producto <b>' . e($product->title) . '</b> ha sido eliminado correctamente.');
@@ -137,6 +136,7 @@ class ProductosController extends Controller
     {
         return view('productos.edit', [
             'product' => Product::findOrFail($id),
+            'categories' => Categories::all(),
         ]);
     }
 
@@ -149,6 +149,7 @@ class ProductosController extends Controller
             'description' => 'required|string',
             'price' => 'required|numeric|min:0',
             'release_date' => 'required|date',
+            'category_fk' => 'required|exists:categories,category_id',
         ],[
             'title.required' => 'El título es obligatorio.',
             'title.string' => 'El título debe contener texto.',
@@ -160,21 +161,17 @@ class ProductosController extends Controller
             'price.min' => 'El precio no puede ser negativo.',
             'release_date.required' => 'La fecha de lanzamiento es obligatoria.',
             'release_date.date' => 'Introduzca una fecha válida.',
+            'category_fk.required' => 'La categoría es obligatoria.',
+            'category_fk.exists' => 'La categoría seleccionada no es válida.',
         ]);
 
-        $data = $request->only([
-            'title',
-            'description',
-            'price',
-            'release_date',
-            'img_description',
-        ]);
+        $data['img_description'] = $request->img_description;
 
         // --------------------------------------------------
             /* Upload de la imagen y descripcion */
         // --------------------------------------------------
         if($request->hasFile('img')){
-            $filename = $request->file('img')->store('imgs') ;
+            $filename = $request->file('img')->store('imgs');
             $data['img'] = $filename;
             $oldImage = $product->img; // Guardamos el nombre de la imagen antigua para eliminarla después de actualizar el producto.
         }
@@ -185,9 +182,6 @@ class ProductosController extends Controller
             Storage::delete($oldImage);
         }
 
-
-        $product = Product::findOrFail($id);
-        $product->update($data);
         return redirect()
         ->route('productos.index')
         ->with('feedback.message', 'El producto <b>' . e($product->title) . '</b> ha sido actualizado correctamente.');

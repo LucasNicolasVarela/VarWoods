@@ -16,8 +16,12 @@
             <nav class="navbar navbar-expand-lg bg-body-tertiary shadow-sm">
                 <div class="container-fluid">
                     {{-- Logo --}}
-                    <a class="navbar-brand fw-bold" href="{{ route('home') }}">
-                        VarWoods
+                    <a class="navbar-brand fw-bold d-flex align-items-center gap-2" href="{{ route('home') }}">
+                        <img src="{{ asset('favicon-varwoods.png') }}"
+                            alt="Logo VarWoods"
+                            width="32"
+                            height="32">
+                        <span>VarWoods</span>
                     </a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarNav"
