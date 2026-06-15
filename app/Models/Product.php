@@ -56,4 +56,18 @@ class Product extends Model
         return $this->belongsTo(Categories::class, 'category_fk', 'category_id');
     }
 
+    /********************************* */
+         /* Relaciones de Muchos a muchos */
+    /********************************* */
+    public function woodTypes()
+    {
+        return $this->belongsToMany(
+            WoodType::class,
+            'product_have_wood_type',
+            'product_fk',
+            'wood_type_fk',
+            'id',
+            'wood_type_id'
+        );
+    }
 }

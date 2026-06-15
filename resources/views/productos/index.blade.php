@@ -55,6 +55,12 @@
                             {{ $product->category->name }}
                         </p>
 
+                        @foreach($product->woodTypes as $woodType)
+                            <p class="card-text text-muted fw-bold fs-5">
+                                {{ $woodType->name }}
+                            </p>
+                        @endforeach
+
                         <p class="card-text text-muted">
                             {{ Str::limit($product->description, 80) }}
                         </p>
