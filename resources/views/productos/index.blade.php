@@ -55,11 +55,17 @@
                             {{ $product->category->name }}
                         </p>
 
-                        @foreach($product->woodTypes as $woodType)
+                        @if($product->woodTypes->isEmpty())
                             <p class="card-text text-muted fw-bold fs-5">
-                                {{ $woodType->name }}
+                                Melamina
                             </p>
-                        @endforeach
+                        @else
+                            @foreach($product->woodTypes as $woodType)
+                                <p class="card-text text-muted fw-bold fs-5">
+                                    {{ $woodType->name }}
+                                </p>
+                            @endforeach
+                        @endif
 
                         <p class="card-text text-muted">
                             {{ Str::limit($product->description, 80) }}

@@ -16,7 +16,8 @@ class ProductosController extends Controller
         /* $products = DB::table('product')->get(); */ // El método get() nos devuelve una colección con los resultados de la consulta.
         /* dd($products); */ // El método dd() nos muestra el contenido de la variable y detiene la ejecución del programa.
 
-        $products = Product::with('category')->get(); // Cargamos también la categoría para evitar consultas innecesarias.
+        $products = Product::with('category', 'woodTypes')->get(); // Cargamos también la categoría y los tipos de madera para evitar consultas innecesarias.
+
         /* dd($products); */ // El método dd() nos muestra el contenido de la variable y detiene la ejecución del programa.
 
         // El método view() nos permite renderizar una vista. Recibe dos parámetros: el nombre de la vista y un array con los datos que queremos pasarle a la vista.
