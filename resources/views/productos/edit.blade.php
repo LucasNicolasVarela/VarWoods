@@ -4,12 +4,22 @@
  * @var Illuminate\Support\ViewErrorBag $errors
  * @var \App\Models\Product $product
  * @var \App\Models\Category[] | \Illuminate\Database\Eloquent\Collection $categories
-*/
+ * @var \App\Models\WoodType[] | \Illuminate\Database\Eloquent\Collection $woodtypes
+ */
+
 
 /* ----------
     NOTAS
 -------------*/
 /* En todas las vistas de laravel, la variable $errors está disponible de forma global. Esta variable es una instancia de Illuminate\Support\ViewErrorBag y contiene los errores que hayan ocurrido en la ejecución anterior. Si no hay errores, esta variable estará vacía. */
+
+
+// En este paso vamos a obtener en un array los ids de los tipos de madera relacionados con el producto que estamos editando para luego poder marcar los checkboxes correspondientes en el formulario de edición. Para esto, utilizamos el método pluck() para obtener una colección con los valores de la columna wood_type_id de la relación woodTypes del producto, y luego convertimos esa colección a un array con el método all().
+// Vvale más mejorar la legibilidad y usar la forma "menos eficiente"
+$woodTypesIds = $product->woodTypes
+    ->pluck('wood_type_id')
+    ->all();
+
 
 ?>
 
@@ -182,6 +192,26 @@
                 </div>
             @endif
         </div>
+
+        <fieldset class="mb-3">
+            <legend>Tipos de Madera</legend>
+
+            @foreach($woodtypes as $woodtype)
+                <label class="form-check">
+                    <input
+                        class="form-check-input"
+                        type="checkbox"
+                        name="woodtypes[]"
+                        value="{{ $woodtype->wood_type_id }}"
+                        @checked(in_array($woodtype->wood_type_id, old('woodtypes', $woodTypesIds)))
+                    >
+
+                    {{ $woodtype->name }}
+                </label>
+            @endforeach
+
+        </fieldset>
+
         <button type="submit" class="btn btn-primary">Publicar</button>
     </form>
 </x-main-layout>

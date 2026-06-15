@@ -3,6 +3,7 @@
 /**
  * @var Illuminate\Support\ViewErrorBag $errors
  * @var \App\Models\Category[] | \Illuminate\Database\Eloquent\Collection $categories
+ * @var \App\Models\WoodType[] | \Illuminate\Database\Eloquent\Collection $woodtypes
 */
 
 /* ----------
@@ -111,9 +112,9 @@
         <div class="mb-2">
             <label for="description" class="form-label">Descripción</label>
             <textarea
-            name="description"
-            id="description"
-            class="form-control @error ('description') is-invalid @enderror"
+                name="description"
+                id="description"
+                class="form-control @error ('description') is-invalid @enderror"
             @error('description')
                 aria-invalid="true"
                 aria-errormessage="error_description"
@@ -146,9 +147,9 @@
         <div class="mb-2">
             <label for="img_description" class="form-label">Descripción de la Imagen</label>
             <textarea
-            name="img_description"
-            id="img_description"
-            class="form-control @error ('img_description') is-invalid @enderror"
+                name="img_description"
+                id="img_description"
+                class="form-control @error ('img_description') is-invalid @enderror"
             @error('img_description')
                 aria-invalid="true"
                 aria-errormessage="error_img_description"
@@ -160,6 +161,26 @@
                 </div>
             @endif
         </div>
+
+        <fieldset class="mb-3">
+            <legend>Tipos de Madera</legend>
+
+            @foreach($woodtypes as $woodtype)
+                <label class="form-check">
+                    <input
+                        class="form-check-input"
+                        type="checkbox"
+                        name="woodtypes[]"
+                        value="{{ $woodtype->wood_type_id }}"
+                        @checked(in_array($woodtype->wood_type_id, old('woodtypes', [])))
+                    >
+
+                    {{ $woodtype->name }}
+                </label>
+            @endforeach
+
+        </fieldset>
+
         <button type="submit" class="btn btn-primary">Publicar</button>
     </form>
 </x-main-layout>

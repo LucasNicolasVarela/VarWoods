@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Categories;
+use App\Models\WoodType;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -15,7 +16,7 @@ class ProductosController extends Controller
         // Acá traemos los productos de la base de datos y se los pasamos a la vista para que los muestre.
         /* $products = DB::table('product')->get(); */ // El método get() nos devuelve una colección con los resultados de la consulta.
         /* dd($products); */ // El método dd() nos muestra el contenido de la variable y detiene la ejecución del programa.
-
+        //El método with() nos permite cargar las relaciones de Eloquent para evitar consultas innecesarias a la base de datos. El profe lo llama como "carga ansiosa o anticipada" sería el caso contrario a lazyload
         $products = Product::with('category', 'woodTypes')->get(); // Cargamos también la categoría y los tipos de madera para evitar consultas innecesarias.
 
         /* dd($products); */ // El método dd() nos muestra el contenido de la variable y detiene la ejecución del programa.
@@ -43,6 +44,7 @@ class ProductosController extends Controller
     public function create(){
         return view('productos.create', [
             'categories' => Categories::all(),
+            'woodtypes' => WoodType::all(),
         ]);
     }
 
@@ -103,7 +105,21 @@ class ProductosController extends Controller
 
         // --------------------------------------------------
 
+
         $product = Product::create($data);
+
+
+        // --------------------------------------------------
+        //    Agregar datos relacionados con la tabla pivot
+        //---------------------------------------------------
+
+        // El método attach() nos permite agregar registros a la tabla pivot. Recibe como parámetro un array con los ids de los tipos de madera seleccionados en el formulario.
+
+        $product->woodTypes()->attach($request->input('woodtypes', [])); // El segundo parámetro del método input() es un valor por defecto que se devuelve si no se encuentra el campo en la solicitud. En este caso, si no se selecciona ningún tipo de madera, se devuelve un array vacío para evitar errores al intentar agregar registros a la tabla pivot con un valor nulo.
+
+        //---------------------------------------------------
+
+
 
         // IMPORTANTE: toda pantalla que reciba datos por POST, después de procesarlos, debe redirigir a otra pantalla para evitar que si el usuario refresca la página, se vuelva a enviar el formulario y se dupliquen los datos en la base de datos. Para redirigir a otra pantalla, podemos usar el método redirect().
         return redirect()
@@ -114,6 +130,15 @@ class ProductosController extends Controller
     public function destroy(int $id)
     {
         $product = Product::findOrFail($id);
+
+        // Paso donde eliminamos primero los registros de la tabla pivot relacionada
+        // En casos de relaciones de muchos a muchos contamos con el método detach() que nos permite eliminar los registros de la tabla pivot relacionados con el producto que estamos eliminando. Recibe como parámetro un array con los ids de los tipos de madera relacionados con el producto.
+
+        $product->woodTypes()->detach(); // Si no le pasamos ningún parámetro, el método detach() elimina todos los registros relacionados con el producto en la tabla pivot.
+
+        //---------------------------------------------------
+
+
         $product->delete();
 
         // Si el producto tiene una imagen asociada, la eliminamos del almacenamiento cuando se elimina el producto.
@@ -138,6 +163,7 @@ class ProductosController extends Controller
         return view('productos.edit', [
             'product' => Product::findOrFail($id),
             'categories' => Categories::all(),
+            'woodtypes' => WoodType::orderBy('name')->get(),
         ]);
     }
 
@@ -165,6 +191,18 @@ class ProductosController extends Controller
             'category_fk.required' => 'La categoría es obligatoria.',
             'category_fk.exists' => 'La categoría seleccionada no es válida.',
         ]);
+
+
+
+        // ---------------------------------------------------------------------------
+            /* Actualizar egistros de la tabla pivot en cuanto a tipos de maderas */
+        // ---------------------------------------------------------------------------
+        // Cuado solicitamos editar vamos a recibir un array de id que son los que usuario pide que queden como relacion.
+        // El metodo sync() nos permite sincronizar los registros en la tabla en todos los escenarios posibles
+
+        $product->woodTypes()->sync($request->input('woodtypes', []));
+
+
 
         $data['img_description'] = $request->img_description;
 
