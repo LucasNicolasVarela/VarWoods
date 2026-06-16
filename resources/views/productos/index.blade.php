@@ -15,9 +15,13 @@
     <p>Explora nuestra amplia selección de productos de madera de alta calidad.</p>
 
     @auth
-        <div class="mb-3">
-            <a href="{{ route('productos.create') }}" class="btn btn-success">Agregar Producto</a>
-        </div>
+        @if(auth()->user()->role === 'admin')
+            <div class="mb-3">
+                <a href="{{ route('productos.create') }}" class="btn btn-success">
+                    Agregar Producto
+                </a>
+            </div>
+        @endif
     @endauth
 
     <div class="row g-4">
@@ -89,21 +93,23 @@
                             </a>
 
                             @auth
-                                <div class="d-flex gap-2">
-                                    <a
-                                        href="{{ route('productos.edit', ['id' => $product->id]) }}"
-                                        class="btn btn-warning flex-fill"
-                                    >
-                                        Editar
-                                    </a>
+                                @if(auth()->user()->role === 'admin')
+                                    <div class="d-flex gap-2">
+                                        <a
+                                            href="{{ route('productos.edit', ['id' => $product->id]) }}"
+                                            class="btn btn-warning flex-fill"
+                                        >
+                                            Editar
+                                        </a>
 
-                                    <a
-                                        href="{{ route('productos.delete', ['id' => $product->id]) }}"
-                                        class="btn btn-danger flex-fill"
-                                    >
-                                        Eliminar
-                                    </a>
-                                </div>
+                                        <a
+                                            href="{{ route('productos.delete', ['id' => $product->id]) }}"
+                                            class="btn btn-danger flex-fill"
+                                        >
+                                            Eliminar
+                                        </a>
+                                    </div>
+                                @endif
                             @endauth
                         </div>
                     </div>

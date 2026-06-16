@@ -38,28 +38,28 @@ Route::get('blogs/{id}', [\App\Http\Controllers\BlogsController::class, 'show'])
 
 Route::get('/blog/nuevo', [\App\Http\Controllers\BlogsController::class, 'create'])
     ->name('blogs.create')
-    ->middleware('auth'); // Esto es para proteger la ruta y que solo los usuarios autenticados puedan acceder a ella. Lo vamos a agregar en todas las que requieran un permiso de autenticación, como la de editar y eliminar
+    ->middleware(['auth', 'admin']); // Esto es para proteger la ruta y que solo los usuarios autenticados puedan acceder a ella. Lo vamos a agregar en todas las que requieran un permiso de autenticación, como la de editar y eliminar
 
 Route::post('/blog/nuevo', [\App\Http\Controllers\BlogsController::class, 'store'])  // METODO "store" traducido de "almacenar" o "guardar"
     ->name('blogs.store')
-    ->middleware('auth');
+    ->middleware(['auth', 'admin']);
 
 Route::post('/blog/{id}/eliminar', [\App\Http\Controllers\BlogsController::class, 'destroy'])
     ->whereNumber('id')
     ->name('blogs.destroy')
-    ->middleware('auth');
+    ->middleware(['auth', 'admin']);
 
 Route::get('/blog/{id}/eliminar', [\App\Http\Controllers\BlogsController::class, 'delete'])
     ->name('blogs.delete')
-    ->middleware('auth');
+    ->middleware(['auth', 'admin']);
 
 Route::get('/blog/{id}/editar', [\App\Http\Controllers\BlogsController::class, 'edit'])
     ->name('blogs.edit')
-    ->middleware('auth');
+    ->middleware(['auth', 'admin']);
 
 Route::post('/blog/{id}/editar', [\App\Http\Controllers\BlogsController::class, 'update'])
     ->name('blogs.update')
-    ->middleware('auth');
+    ->middleware(['auth', 'admin']);
 
 /*----------------------------
     Rutas para el producto
@@ -76,29 +76,29 @@ Route::get('productos/{id}', [\App\Http\Controllers\ProductosController::class, 
 
 Route::get('productos/nuevo', [\App\Http\Controllers\ProductosController::class, 'create'])
     ->name('productos.create')
-    ->middleware('auth');
+    ->middleware(['auth', 'admin']);
 
 // Para la creacion de una ruta de insercion vamos a crear una ruta con la misma URL que la del formulario pero que en vez de GET  utilice POST
 Route::post('productos/nuevo', [\App\Http\Controllers\ProductosController::class, 'store'])
     ->name('productos.store')
-    ->middleware('auth');
+    ->middleware(['auth', 'admin']);
 
 Route::post('productos/{id}/eliminar', [\App\Http\Controllers\ProductosController::class, 'destroy'])
     ->whereNumber('id')
     ->name('productos.destroy')
-    ->middleware('auth');
+    ->middleware(['auth', 'admin']);
 
 Route::get('/productos/{id}/eliminar', [\App\Http\Controllers\ProductosController::class, 'delete'])
     ->name('productos.delete')
-    ->middleware('auth');
+    ->middleware(['auth', 'admin']);
 
 Route::get('/productos/{id}/editar', [\App\Http\Controllers\ProductosController::class, 'edit'])
     ->name('productos.edit')
-    ->middleware('auth');
+    ->middleware(['auth', 'admin']);
 
 Route::post('/productos/{id}/editar', [\App\Http\Controllers\ProductosController::class, 'update'])
     ->name('productos.update')
-    ->middleware('auth');
+    ->middleware(['auth', 'admin']);
 
 // -------------------------------------------------------------------------------------------//
     /* Si entra por GET vamso al formulario, si entra por POST vamos a intentar de grabar */

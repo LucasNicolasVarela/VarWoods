@@ -14,12 +14,16 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware): void {
         //Acá vamos a configurar a donde vamos a redireccionar al usuario cuando intente acceder a una ruta protegida sin estar autenticado.
         /* $middleware->redirectGuestsTo('/iniciar-sesion'); */ // Esta forma es pasando directamente la URL
-        $middleware->redirectGuestsTo( function() {
-            Session::flash('feedback.message', 'Debes iniciar sesión para acceder a esta página.'); // Esto es para mostrar un mensaje de feedback al usuario cuando intente acceder a una ruta protegida sin estar autenticado.
-            Session::flash('feedback.type', 'danger'); // Esto es para mostrar un mensaje de feedback al usuario cuando intente acceder a una ruta protegida sin estar autenticado.
+
+        $middleware->redirectGuestsTo(function () {
+            Session::flash('feedback.message', 'Debes iniciar sesión para acceder a esta página.');
+            Session::flash('feedback.type', 'danger');
             return route('login.show');
         });
 
+        $middleware->alias([
+            'admin' => \App\Http\Middleware\VerificationAdminRole::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //
