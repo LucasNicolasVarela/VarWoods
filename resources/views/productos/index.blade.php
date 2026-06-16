@@ -68,7 +68,7 @@
                         @endif
 
                         <p class="product-wood-type">
-                            madera:
+                            Madera:
                             @if($product->woodTypes->isEmpty())
                                 Melamina
                             @else
