@@ -52,39 +52,28 @@
                         <h5 class="card-title">
                             {{ $product->title }}
                         </h5>
-
                         @if($product->promo_price)
-
                             <div class="product-prices">
-
                                 <span class="product-old-price">
                                     ${{ number_format($product->price, 0, ',', '.') }}
                                 </span>
-
                                 <span class="product-promo-price">
                                     ${{ number_format($product->promo_price, 0, ',', '.') }}
                                 </span>
-
                             </div>
-
                         @else
-
                             <p class="product-normal-price">
                                 ${{ number_format($product->price, 0, ',', '.') }}
                             </p>
-
                         @endif
 
                         <p class="product-wood-type">
-
                             madera:
-
                             @if($product->woodTypes->isEmpty())
                                 Melamina
                             @else
                                 {{ $product->woodTypes->pluck('name')->implode(', ') }}
                             @endif
-
                         </p>
 
                         <p class="card-text text-muted">
