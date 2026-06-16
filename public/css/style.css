@@ -160,36 +160,66 @@ html, body, #app{
 /* ================================
    template de la vista de producto
 =================================== */
-.product-detail {
-    margin-top: 2rem;
+/* CARDS */
+
+.product-card-image-wrapper{
+    position: relative;
 }
 
-.product-image-container {
-    width: 100%;
-    height: 600px;
-    overflow: hidden;
-    border-radius: 10px;
-    background-color: #f5f5f5;
-}
-
-.product-image {
-    width: 100%;
-    height: 100%;
+.product-card-image{
+    height: 220px;
     object-fit: cover;
 }
 
-.product-info-card {
-    padding: 1.5rem;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    background-color: #fff;
-    height: 100%;
+.product-category-badge{
+    position: absolute;
+    top: 12px;
+    left: 12px;
+
+    background: #fff;
+    padding: 8px 12px;
+
+    font-size: 0.95rem;
+    font-weight: 700;
+
+    color: #4b5563;
+
+    border-radius: 4px;
+
+    z-index: 2;
+
+    box-shadow: 0 2px 8px rgba(0,0,0,.15);
 }
 
-.product-price {
-    font-size: 2rem;
-    font-weight: bold;
-    margin: 0;
+.product-prices{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: .75rem;
+}
+
+.product-old-price{
+    color: #999;
+    text-decoration: line-through;
+    font-size: .9rem;
+}
+
+.product-promo-price{
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #212529;
+}
+
+.product-normal-price{
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #212529;
+}
+
+.product-wood-type{
+    color: #4b5563;
+    font-weight: 700;
+    font-size: 1rem;
 }
 
 
@@ -199,10 +229,6 @@ html, body, #app{
 ========================= */
 
 @media (max-width: 992px) {
-
-    .product-image-container {
-        height: 350px;
-    }
 
     .footer-container {
         grid-template-columns: repeat(2, 1fr);

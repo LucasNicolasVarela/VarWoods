@@ -18,7 +18,7 @@ class Product extends Model
 
     protected $table = 'product'; // Esto es para indicarle a Laravel el nombre de la tabla que corresponde a este modelo, en caso de que no siga la convencion.
 
-    protected $fillable = ['title', 'description', 'price', 'release_date', 'img', 'img_description', 'category_fk']; // El atributo $fillable nos permite indicar qué campos de la tabla se pueden asignar masivamente. Esto es útil para evitar ataques de asignación masiva, donde un atacante puede enviar datos no deseados a través de un formulario y asignarlos a campos que no deberían ser asignados.
+    protected $fillable = ['title', 'description', 'price', 'promo_price', 'release_date', 'img', 'img_description', 'category_fk']; // El atributo $fillable nos permite indicar qué campos de la tabla se pueden asignar masivamente. Esto es útil para evitar ataques de asignación masiva, donde un atacante puede enviar datos no deseados a través de un formulario y asignarlos a campos que no deberían ser asignados.
 
 
     /********************************* */
@@ -40,6 +40,22 @@ class Product extends Model
             set: fn($value) => $value * 100 // Esto es para convertir el
         );
     }
+
+    // El mismo proceso para el promo_price pero este puede ser opcional por eso queda la opcion del null
+
+    public function promoPrice(): Attribute
+    {
+        return Attribute::make(
+            get: fn($value) => $value !== null
+                ? $value / 100
+                : null,
+
+            set: fn($value) => $value !== null
+                ? $value * 100
+                : null
+        );
+    }
+
 
     /********************************* */
          /* Relaciones de Eloquent */

@@ -26,46 +26,66 @@
                 <div class="card h-100 shadow-sm">
 
                     {{-- tarjetas con imagenes --}}
-                    @if($product->img !== null && \Storage::exists($product->img))
-                        <img
-                            src="{{ \Storage::url($product->img) }}"
-                            class="card-img-top"
-                            alt="{{ $product->img_description }}"
-                            style="height: 220px; object-fit: cover;"
-                        >
-                    @else
-                        <img
-                            src="https://placehold.co/600x400?text=Sin+Imagen"
-                            class="card-img-top"
-                            alt="Sin imagen"
-                            style="height: 220px; object-fit: cover;"
-                        >
-                    @endif
+                    <div class="product-card-image-wrapper">
+
+                        <span class="product-category-badge">
+                            {{ $product->category->name }}
+                        </span>
+
+                        @if($product->img !== null && \Storage::exists($product->img))
+                            <img
+                                src="{{ \Storage::url($product->img) }}"
+                                class="card-img-top product-card-image"
+                                alt="{{ $product->img_description }}"
+                            >
+                        @else
+                            <img
+                                src="https://placehold.co/600x400?text=Sin+Imagen"
+                                class="card-img-top product-card-image"
+                                alt="Sin imagen"
+                            >
+                        @endif
+
+                    </div>
 
                     <div class="card-body d-flex flex-column">
                         <h5 class="card-title">
                             {{ $product->title }}
                         </h5>
 
-                        <p class="card-text text-success fw-bold fs-5">
-                            ${{ $product->price }}
-                        </p>
+                        @if($product->promo_price)
 
-                        <p class="card-text text-muted fw-bold fs-5">
-                            {{ $product->category->name }}
-                        </p>
+                            <div class="product-prices">
 
-                        @if($product->woodTypes->isEmpty())
-                            <p class="card-text text-muted fw-bold fs-5">
-                                Melamina
-                            </p>
+                                <span class="product-old-price">
+                                    ${{ number_format($product->price, 0, ',', '.') }}
+                                </span>
+
+                                <span class="product-promo-price">
+                                    ${{ number_format($product->promo_price, 0, ',', '.') }}
+                                </span>
+
+                            </div>
+
                         @else
-                            @foreach($product->woodTypes as $woodType)
-                                <p class="card-text text-muted fw-bold fs-5">
-                                    {{ $woodType->name }}
-                                </p>
-                            @endforeach
+
+                            <p class="product-normal-price">
+                                ${{ number_format($product->price, 0, ',', '.') }}
+                            </p>
+
                         @endif
+
+                        <p class="product-wood-type">
+
+                            madera:
+
+                            @if($product->woodTypes->isEmpty())
+                                Melamina
+                            @else
+                                {{ $product->woodTypes->pluck('name')->implode(', ') }}
+                            @endif
+
+                        </p>
 
                         <p class="card-text text-muted">
                             {{ Str::limit($product->description, 80) }}

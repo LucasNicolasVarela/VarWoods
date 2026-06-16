@@ -74,6 +74,29 @@ $woodTypesIds = $product->woodTypes
                 </div>
             @endif
         </div>
+
+        <div class="mb-2">
+            <label for="promo_price" class="form-label">Precio Promocional</label>
+            <input
+                type="number"
+                name="promo_price"
+                id="promo_price"
+                class="form-control @error ('promo_price') is-invalid @enderror"
+                step="0.01"
+                @error('promo_price')
+                    aria-invalid="true"
+                    aria-errormessage="error_promo_price"
+                @enderror
+                value="{{ old('promo_price', $product->promo_price) }}"
+            >
+
+            @error('promo_price')
+                <div class="text-danger mb-0" id="error_promo_price">
+                    {{ $message }}
+                </div>
+            @enderror
+        </div>
+
         <div class="mb-2">
             <label for="release_date" class="form-label">Partida de Producción</label>
             <input
