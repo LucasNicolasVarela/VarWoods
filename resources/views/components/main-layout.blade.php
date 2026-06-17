@@ -45,9 +45,9 @@
                             <li class="nav-item">
                                 <x-nav-link to="productos.index">Productos</x-nav-link>
                             </li>
-                            <li class="nav-item">
+                            {{-- <li class="nav-item">
                                 <x-nav-link to="blogs.index">Blogs</x-nav-link>
-                            </li>
+                            </li> --}}
                             @auth
                                 <li class="nav-item">
                                     <form action="{{ route('logout') }}" method="post">
@@ -100,47 +100,52 @@
             </main>
             <footer class="footer">
                 <div class="footer-container">
-                    {{-- MARCA --}}
-                    <div class="footer-column">
-                        <h4 class="footer-title">VarWoods</h4>
+                    <section class="footer-column">
+                        <h2 class="footer-title h4">VarWoods</h2>
                         <p class="footer-brand-text">
                             Diseño y calidad para cada espacio.
                         </p>
-                    </div>
-                    {{-- QUIÉNES SOMOS --}}
-                    <div class="footer-column">
-                        <h4 class="footer-title">QUIÉNES SOMOS</h4>
+                    </section>
+
+                    <section class="footer-column">
+                        <h2 class="footer-title h4">QUIÉNES SOMOS</h2>
                         <ul class="footer-links">
                             <li>
                                 <a href="{{ route('about') }}">
                                     Sobre Nosotros
                                 </a>
                             </li>
+                            <li>
+                                <a href="{{ route('blogs.index') }}">Nuestros blogs</a>
+                            </li>
                         </ul>
-                    </div>
-                    {{-- PREGUNTAS FRECUENTES --}}
-                    <div class="footer-column">
-                        <h4 class="footer-title">PREGUNTAS FRECUENTES</h4>
+                    </section>
+
+                    <section class="footer-column">
+                        <h2 class="footer-title h4">PREGUNTAS FRECUENTES</h2>
                         <ul class="footer-links">
                             <li><a href="#">Métodos de pago y envío</a></li>
                             <li><a href="#">Cambios y devoluciones</a></li>
                             <li><a href="#">Términos y condiciones</a></li>
                         </ul>
-                    </div>
-                    {{-- CONTACTO --}}
-                    <div class="footer-column">
-                        <h4 class="footer-title">CONTACTO</h4>
-                        <ul class="footer-links">
-                            <li><a href="#">Whatsapp</a></li>
-                            <li><a href="#">Local</a></li>
-                            <li><a href="#">Dirección</a></li>
-                            <li><a href="#">Email</a></li>
-                        </ul>
-                    </div>
+                    </section>
+
+                    <section class="footer-column">
+                        <h2 class="footer-title h4">CONTACTO</h2>
+                        <address class="mb-0">
+                            <ul class="footer-links">
+                                <li><a href="#">Whatsapp</a></li>
+                                <li><a href="#">Local</a></li>
+                                <li><a href="#">Dirección</a></li>
+                                <li><a href="#">Email</a></li>
+                            </ul>
+                        </address>
+                    </section>
                 </div>
+
                 <div class="footer-bottom">
                     <p>
-                        VarWoods &copy; 2026 Todos los derechos reservados.
+                        VarWoods &copy; {{ date('Y') }} Todos los derechos reservados.
                     </p>
                 </div>
             </footer>
