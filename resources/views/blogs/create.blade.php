@@ -16,7 +16,7 @@
         </div>
     @endif
 
-    <form action="{{ route('blogs.store') }}" method="POST">
+    <form action="{{ route('blogs.store') }}" method="POST" enctype="multipart/form-data">
         <div class="mb-2">
             <label for="title" class="form-label">Nombre del blog</label>
             <input
@@ -111,6 +111,45 @@
                 </div>
             @endif
         </div>
+
+        <div class="mb-2">
+            <label for="img" class="form-label">Imagen</label>
+            <input
+                type="file"
+                name="img"
+                id="img"
+                class="form-control @error ('img') is-invalid @enderror"
+                @error('img')
+                    aria-invalid="true"
+                    aria-errormessage="error_img"
+                @enderror
+            >
+            @error('img')
+                <div class="text-danger mb-0" id="error_img">
+                    {{ $message }}
+                </div>
+            @endif
+        </div>
+
+        <div class="mb-2">
+            <label for="img_description" class="form-label">Descripción de la Imagen</label>
+            <textarea
+                name="img_description"
+                id="img_description"
+                class="form-control @error ('img_description') is-invalid @enderror"
+            @error('img_description')
+                aria-invalid="true"
+                aria-errormessage="error_img_description"
+            @enderror
+            >{{ old('img_description') }}</textarea>
+
+            @error('img_description')
+                <div class="text-danger mb-0" id="error_img_description">
+                    {{ $message }}
+                </div>
+            @endif
+        </div>
+
         <button type="submit" class="btn btn-primary">Publicar</button>
     </form>
 </x-main-layout>

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use DeepCopy\f001\B;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class BlogsController extends Controller
 {
@@ -48,6 +49,8 @@ class BlogsController extends Controller
             'resumen' => 'required|string|max:500',
             'category_name' => 'required|string|max:255',
             'fecha_publicacion' => 'required|date',
+            'img' => 'nullable|image|max:2048',
+            'img_description' => 'nullable|string|max:255',
         ],[
             'title.required' => 'El título es obligatorio.',
             'title.string' => 'El título debe contener texto.',
@@ -75,7 +78,16 @@ class BlogsController extends Controller
             'fecha_publicacion',
         ]);
 
+        if($request->hasFile('img')){
+            $filename = $request->file('img')->store('imgs');
+            $data['img'] = $filename;
+        }
+
+        $data['img_description'] = $request->img_description;
+
+
         $blog = Blog::create($data);
+
 
         return redirect()
         ->route('blogs.index')
@@ -85,11 +97,19 @@ class BlogsController extends Controller
     public function destroy(int $id)
     {
         $blog = Blog::findOrFail($id);
+
         $blog->delete();
 
+        if(isset($blog->img) && $blog->img !== null && Storage::exists($blog->img)){
+            Storage::delete($blog->img);
+        }
+
         return redirect()
-        ->route('blogs.index')
-        ->with('feedback.message', 'El blog <b>' . e($blog->title) . '</b> ha sido eliminado correctamente.');
+            ->route('blogs.index')
+            ->with(
+                'feedback.message',
+                'El blog <b>' . e($blog->title) . '</b> ha sido eliminado correctamente.'
+            );
     }
 
     public function delete(int $id)
@@ -116,6 +136,8 @@ class BlogsController extends Controller
             'resumen' => 'required|string|max:500',
             'category_name' => 'required|string|max:255',
             'fecha_publicacion' => 'required|date',
+            'img' => 'nullable|image|max:2048',
+            'img_description' => 'nullable|string|max:255',
         ],[
             'title.required' => 'El título es obligatorio.',
             'title.string' => 'El título debe contener texto.',
@@ -140,9 +162,29 @@ class BlogsController extends Controller
             'fecha_publicacion',
         ]);
 
+        $data['img_description'] = $request->img_description;
+
+        // --------------------------------------------------
+        // Upload de la imagen y descripción
+        // --------------------------------------------------
+        if($request->hasFile('img')){
+            $filename = $request->file('img')->store('imgs');
+            $data['img'] = $filename;
+
+            $oldImage = $blog->img;
+        }
+
         $blog->update($data);
+            // Si el blog tiene una imagen anterior y es diferente a la nueva, la eliminamos del almacenamiento.
+        if(isset($oldImage) && $oldImage !== null && Storage::exists($oldImage)){
+            Storage::delete($oldImage);
+        }
+
         return redirect()
-        ->route('blogs.index')
-        ->with('feedback.message', 'El blog <b>' . e($blog->title) . '</b> ha sido actualizado correctamente.');
+            ->route('blogs.index')
+            ->with(
+                'feedback.message',
+                'El blog <b>' . e($blog->title) . '</b> ha sido actualizado correctamente.'
+            );
     }
 }
