@@ -5,12 +5,53 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 class AuthController extends Controller
 {
     public function show(){
         return view('auth.login');
     }
+
+    public function register(){
+        return view('auth.register');
+    }
+
+    public function processRegister(Request $request)
+    {
+        $data = $request->validate([
+            'name' => 'required|string|min:3|max:20',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|string|min:8|confirmed',
+        ],
+        [
+            'name.required' => 'El nombre es obligatorio.',
+            'name.string' => 'El nombre debe contener texto.',
+            'name.min' => 'El nombre debe tener al menos 3 caracteres.',
+            'name.max' => 'El nombre no puede tener más de 20 caracteres.',
+
+            'email.required' => 'El correo electrónico es obligatorio.',
+            'email.email' => 'Debe ingresar un correo electrónico válido.',
+            'email.unique' => 'Ya existe una cuenta registrada con ese correo electrónico.',
+
+            'password.required' => 'La contraseña es obligatoria.',
+            'password.string' => 'La contraseña debe contener texto.',
+            'password.min' => 'La contraseña debe tener al menos 8 caracteres.',
+            'password.confirmed' => 'Las contraseñas no coinciden.',
+        ]);
+
+        User::create([
+        'name' => $data['name'],
+        'email' => $data['email'],
+        'password' => $data['password'],
+        ]);
+
+        return redirect()
+        ->route('login.show')
+        ->with('feedback.message', 'Cuenta creada correctamente.')
+        ->with('feedback.type', 'success');
+    }
+
 
     public function process(Request $request){
         // Validar los datos del formulario

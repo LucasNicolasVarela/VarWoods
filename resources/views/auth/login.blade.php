@@ -14,4 +14,9 @@
         </div>
         <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
     </form>
+
+    <p class="mt-3">
+        ¿No tienes cuenta?
+        <a href="{{ route('register') }}">Crear cuenta</a>
+    </p>
 </x-main-layout>

@@ -22,6 +22,12 @@ Route::get('iniciar-sesion', [\App\Http\Controllers\AuthController::class, 'show
 Route::post('iniciar-sesion', [\App\Http\Controllers\AuthController::class, 'process'])
     ->name('login.process');
 
+Route::get('crear-cuenta', [\App\Http\Controllers\AuthController::class, 'register'])
+    ->name('register');
+
+Route::post('crear-cuenta', [\App\Http\Controllers\AuthController::class, 'processRegister'])
+    ->name('register.process');
+
 Route::post('cerrar-sesion', [\App\Http\Controllers\AuthController::class, 'logout'])
     ->name('logout');
 
