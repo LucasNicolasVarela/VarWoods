@@ -2,17 +2,28 @@
 
 namespace App\Http\Controllers;
 
-class HomeController extends Controller
+use App\Models\Product;
+use App\Models\Blog;
 
+class HomeController extends Controller
 {
     public function home()
     {
-        return view('welcome');
+        $products = Product::with(['category', 'woodTypes'])
+            ->take(12)
+            ->get();
+
+        $blogs = Blog::take(3)
+            ->get();
+
+        return view('welcome', [
+            'products' => $products,
+            'blogs' => $blogs,
+        ]);
     }
 
     public function about()
     {
         return view('about');
     }
-
 }

@@ -101,10 +101,17 @@
             <footer class="footer">
                 <div class="footer-container">
                     <section class="footer-column">
-                        <h2 class="footer-title h4">VarWoods</h2>
+
+                        <img
+                            src="{{ asset('storage/imgs/logo-footer.png') }}"
+                            alt="Logo VarWoods"
+                            class="footer-logo"
+                        >
                         <p class="footer-brand-text">
                             Diseño y calidad para cada espacio.
                         </p>
+
+
                     </section>
 
                     <section class="footer-column">
@@ -150,7 +157,7 @@
                 </div>
             </footer>
         </div>
-        <script src=" <?= url('js/bootstrap.bundle.min.js'); ?>"></script>
+        <script src="{{ asset('js/bootstrap.bundle.js') }}"></script>
     </body>
 </html>
 

@@ -76,7 +76,7 @@ html, body, #app{
 ========================= */
 
 .footer {
-    background-color: #1d1d1d;
+    background-color: #000000;
     border-top: 1px solid #dddddd;
     padding-top: 50px;
     color: #ffffff;
@@ -160,7 +160,7 @@ html, body, #app{
 /* ================================
    template de la vista de producto
 =================================== */
-/* CARDS */
+/* Tarjetas de producto */
 
 .product-card-image-wrapper{
     position: relative;
@@ -225,6 +225,36 @@ html, body, #app{
 
 
 /* =========================
+   CARRUSEL DE LA HOME
+========================= */
+
+#featuredProductsCarouselDesktop,
+#featuredProductsCarouselMobile {
+    padding-inline: 60px;
+}
+
+#featuredProductsCarouselDesktop .carousel-control-prev,
+#featuredProductsCarouselMobile .carousel-control-prev {
+    width: 50px;
+    left: 0;
+}
+
+#featuredProductsCarouselDesktop .carousel-control-next,
+#featuredProductsCarouselMobile .carousel-control-next {
+    width: 50px;
+    right: 0;
+}
+
+#featuredProductsCarouselDesktop .carousel-control-prev-icon,
+#featuredProductsCarouselDesktop .carousel-control-next-icon,
+#featuredProductsCarouselMobile .carousel-control-prev-icon,
+#featuredProductsCarouselMobile .carousel-control-next-icon {
+    filter: invert(1);
+    background-size: 100%;
+}
+
+
+/* =========================
    RESPONSIVE
 ========================= */
 
@@ -258,4 +288,16 @@ html, body, #app{
     .footer-bottom {
         margin-top: 35px;
     }
+}
+
+.footer-logo{
+    width: 100%;
+    max-width: 120px;
+    height: auto;
+    display: block;
+}
+.footer-column:first-child{
+    align-items: center;
+    text-align: center;
+    gap: 0px;
 }
