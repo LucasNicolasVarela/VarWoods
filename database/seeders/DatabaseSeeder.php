@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
+
 class DatabaseSeeder extends Seeder
 {
     use WithoutModelEvents;
@@ -24,10 +25,11 @@ class DatabaseSeeder extends Seeder
 
         // Acá se definen los seeders que se van a ejecutar, el orden es importante por que si por ejemplo el ProductSeeder se ejecuta antes que el CategoriesSeeder va a dar error por que el ProductSeeder necesita que existan las categorías para poder asignarles un producto.
 
-        // Ya lo hicimos a mano mil veces, y user requiere borrarlo desde SQL
+        // RECORDATORIO: presta atencion al cargarlo para no tener que refrescarlo devuelta
 
         $this->call([
             UserSeeder::class,
+            PurchaseOrderSeeder::class,
             WoodTypeSeeder::class,
             CategoriesSeeder::class,
             ProductSeeder::class,

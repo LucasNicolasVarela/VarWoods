@@ -17,6 +17,12 @@ class User extends Authenticatable
     /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable;
 
+    // se agrega la rlacion usuario con orden de compra
+    public function purchaseOrders()
+    {
+        return $this->hasMany(PurchaseOrder::class);
+    }
+
     /**
      * Get the attributes that should be cast.
      *
