@@ -42,9 +42,9 @@
                                     </svg>
                                 </a>
                             </li>
-                            <li class="nav-item">
+                            {{--  <li class="nav-item">
                                 <x-nav-link to="productos.index">Productos</x-nav-link>
-                            </li>
+                            </li> --}}
                             {{-- <li class="nav-item">
                                 <x-nav-link to="blogs.index">Blogs</x-nav-link>
                             </li> --}}
@@ -124,6 +124,9 @@
                             </li>
                             <li>
                                 <a href="{{ route('blogs.index') }}">Nuestros blogs</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('productos.index') }}">Nuestros Productos</a>
                             </li>
                         </ul>
                     </section>

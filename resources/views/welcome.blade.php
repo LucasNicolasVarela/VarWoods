@@ -14,7 +14,13 @@
 
     <section class="mb-5">
 
-        <h2 class="mb-4">Nuestros productos destacados</h2>
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="mb-0">Nuestros productos destacados</h2>
+
+            <a href="{{ route('productos.index') }}" class="text-decoration-none fw-semibold">
+                Ver todos los productos →
+            </a>
+        </div>
 
         {{-- DESKTOP: 4 productos por slide --}}
         <div
@@ -255,7 +261,13 @@
     </section>
 
     <section>
-        <h2>Últimos artículos del blog</h2>
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="mb-0">Últimos artículos del blog</h2>
+
+            <a href="{{ route('blogs.index') }}" class="text-decoration-none fw-semibold">
+                Ver todos los blogs →
+            </a>
+        </div>
         <div class="row g-4 mt-2">
             @foreach($blogs as $blog)
                 <div class="col-md-4">

@@ -21,6 +21,8 @@ class BlogSeeder extends Seeder
                 'resumen' => 'Descubre cómo elegir la madera perfecta para tus muebles con nuestra guía completa.',
                 'category_name' => 'Madera',
                 'fecha_publicacion' => '2024-06-01',
+                'img' => 'blogs/blogelegirmadera.png',
+                'img_description' => 'Cómo elegir la madera adecuada para tus muebles',
             ],
             [
                 'id' => 2,
@@ -29,6 +31,8 @@ class BlogSeeder extends Seeder
                 'resumen' => 'Conocé las tendencias en muebles de madera que dominarán el 2024.',
                 'category_name' => 'Diseño',
                 'fecha_publicacion' => '2024-06-10',
+                'img' => 'blogs/blogdiseñominimalista.png',
+                'img_description' => 'Tendencias en muebles de madera para 2024',
             ],
             [
                 'id' => 3,
@@ -37,6 +41,8 @@ class BlogSeeder extends Seeder
                 'resumen' => 'Aprendé a mantener tus muebles de madera como nuevos por más tiempo.',
                 'category_name' => 'Cuidado',
                 'fecha_publicacion' => '2024-06-15',
+                'img' => 'blogs/blogcuidadodemadera.png',
+                'img_description' => 'Cómo cuidar y mantener tus muebles de madera',
             ],
             [
                 'id' => 4,
@@ -45,6 +51,8 @@ class BlogSeeder extends Seeder
                 'resumen' => 'Descubrí por qué los muebles de madera maciza son una gran elección.',
                 'category_name' => 'Madera',
                 'fecha_publicacion' => '2024-06-20',
+                'img' => 'blogs/blogmaderasduraderas.png',
+                'img_description' => 'Ventajas de elegir muebles de madera maciza',
             ],
         ]);
     }
