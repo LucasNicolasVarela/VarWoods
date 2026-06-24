@@ -13,8 +13,14 @@
             {{-- Imagen --}}
             <div class="col-lg-7">
                 @if ($product->img && \Storage::exists($product->img))
-                    <figure class="product-image-container">
-                        <img
+
+                <figure class="product-image-container">
+                    @if($product->promo_price)
+                        <span class="product-category-badge">
+                            {{ round((($product->price - $product->promo_price) / $product->price) * 100) }}% OFF
+                        </span>
+                    @endif
+                    <img
                             src="{{ \Storage::url($product->img) }}"
                             alt="{{ $product->img_description ?? $product->title }}"
                             class="product-image"
@@ -32,9 +38,40 @@
 
                     <div class="mb-4">
                         <h2 class="h5">Precio</h2>
-                        <p class="product-price">
-                            ${{ number_format($product->price, 0, ',', '.') }}
-                        </p>
+                        @if($product->promo_price)
+                            <div class="product-prices">
+                                <span class="product-old-price">
+                                    ${{ number_format($product->price,0,',','.') }}
+                                </span>
+                                <span class="product-promo-price">
+                                    ${{ number_format($product->promo_price,0,',','.') }}
+                                </span>
+                            </div>
+                        @else
+                            <p class="product-normal-price">
+                                ${{ number_format($product->price,0,',','.') }}
+                            </p>
+                        @endif
+                    </div>
+
+                    <div class="mb-4">
+                        <h2 class="h5">
+                            Tipo de madera
+                        </h2>
+
+                        @if($product->woodTypes->count())
+                            <ul class="list-unstyled">
+                                @foreach($product->woodTypes as $wood)
+                                    <li>
+                                        {{ $wood->name }}
+                                    </li>
+                                @endforeach
+                            </ul>
+                        @else
+                            <p>
+                                MDF
+                            </p>
+                        @endif
                     </div>
 
                     <div class="mb-4">

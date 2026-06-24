@@ -16,6 +16,12 @@ html, body, #app{
     font-weight: bold;
 }
 
+main.container-fluid {
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+
 /* =========================
    ICONOS NAVBAR
 ========================= */
@@ -162,32 +168,53 @@ html, body, #app{
 =================================== */
 /* Tarjetas de producto */
 
+.card{
+    border: none;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+/* .card-body{
+    padding: 1.25rem;
+} */
+
+.card-title{
+    font-size: 1.15rem;
+    font-weight: 600;
+    line-height: 1.3;
+}
+
 .product-card-image-wrapper{
     position: relative;
+    height: 300px;
+    overflow: hidden;
 }
 
 .product-card-image{
-    height: 220px;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
+    object-position: center;
+    background: #ffffff;
+
+    transition: transform 0.3s ease;
+}
+
+.card:hover .product-card-image {
+    transform: scale(1.03);
 }
 
 .product-category-badge{
     position: absolute;
     top: 12px;
     left: 12px;
-
-    background: #fff;
-    padding: 8px 12px;
-
+    background: #dd4b4b;
+    padding: 2px 7px;
     font-size: 0.95rem;
     font-weight: 700;
-
-    color: #4b5563;
-
+    color: #ffffff;
     border-radius: 4px;
-
     z-index: 2;
-
     box-shadow: 0 2px 8px rgba(0,0,0,.15);
 }
 
@@ -201,17 +228,18 @@ html, body, #app{
 .product-old-price{
     color: #999;
     text-decoration: line-through;
-    font-size: .9rem;
+    font-size: .85rem;
+    font-weight: 500;
 }
 
 .product-promo-price{
-    font-size: 1.8rem;
+    font-size: 2.4rem;
     font-weight: 700;
     color: #212529;
 }
 
 .product-normal-price{
-    font-size: 1.8rem;
+    font-size: 2.4rem;
     font-weight: 700;
     color: #212529;
 }
@@ -222,11 +250,50 @@ html, body, #app{
     font-size: 1rem;
 }
 
+.card-body .btn{
+    padding: 12px;
+    font-weight: 600;
+}
+
+
+/* =========================
+   HOVER TARJETAS PRODUCTO
+========================= */
+
+.card {
+    border: none;
+    border-radius: 10px;
+    overflow: hidden;
+
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 8px 18px rgba(0,0,0,0.12);
+}
+
+.product-card-image {
+    height: 320px;
+    width: 100%;
+    object-fit: contain;
+    background: #ffffff;
+
+    transition: transform 0.3s ease;
+}
+
+.card:hover .product-card-image {
+    transform: scale(1.02);
+}
 
 
 /* =========================
    CARRUSEL DE LA HOME
 ========================= */
+
+.carousel-inner{
+    padding: 20px 5px;
+}
 
 #featuredProductsCarouselDesktop,
 #featuredProductsCarouselMobile {
@@ -252,6 +319,76 @@ html, body, #app{
     filter: invert(1);
     background-size: 100%;
 }
+
+
+
+/* =========================
+   Vista detalle del producto - PDP
+========================= */
+
+.product-detail{
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 40px 0;
+}
+
+.product-image-container{
+    position: relative;
+    width: 100%;
+    height: 650px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #f8f8f8;
+    border-radius: 12px;
+    overflow: hidden;
+    margin: 0;
+}
+
+.product-image{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+
+/* Información derecha */
+
+.product-info-card{
+    height: 100%;
+    padding: 20px;
+}
+.product-info-card h1{
+    font-size: 2rem;
+    font-weight: 700;
+}
+.product-price{
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+/* Responsive */
+
+@media(max-width:992px){
+
+    .product-image-container{
+        height: 450px;
+    }
+
+}
+@media(max-width:576px){
+
+    .product-detail{
+        padding:20px 0;
+    }
+    .product-image-container{
+        height:350px;
+    }
+}
+
+
 
 
 /* =========================

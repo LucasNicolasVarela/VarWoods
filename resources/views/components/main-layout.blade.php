@@ -86,7 +86,7 @@
                     </div>
                 </div>
             </nav>
-            <main class="container py-2">
+            <main class="container-fluid py-2">
 
                 {{-- Se agrega el contenido flasheado si este existe --}}
                 @if (session()->has('feedback.message'))
@@ -102,11 +102,13 @@
                 <div class="footer-container">
                     <section class="footer-column">
 
-                        <img
-                            src="{{ asset('storage/imgs/logo-footer.png') }}"
-                            alt="Logo VarWoods"
-                            class="footer-logo"
-                        >
+                        <a href="{{ route('home') }}">
+                            <img
+                                src="{{ asset('storage/imgs/logo-footer.png') }}"
+                                alt="Logo VarWoods"
+                                class="footer-logo"
+                            >
+                        </a>
                         <p class="footer-brand-text">
                             Diseño y calidad para cada espacio.
                         </p>

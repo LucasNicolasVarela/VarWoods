@@ -13,42 +13,31 @@
     </p>
 
     <section class="mb-5">
-
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h2 class="mb-0">Nuestros productos destacados</h2>
-
             <a href="{{ route('productos.index') }}" class="text-decoration-none fw-semibold">
                 Ver todos los productos →
             </a>
         </div>
-
         {{-- DESKTOP: 4 productos por slide --}}
         <div
             id="featuredProductsCarouselDesktop"
             class="carousel slide d-none d-lg-block"
             data-bs-ride="false"
         >
-
             <div class="carousel-inner">
-
                 @foreach($products->chunk(4) as $index => $chunk)
-
                     <div class="carousel-item {{ $index === 0 ? 'active' : '' }}">
-
                         <div class="row g-4">
-
                             @foreach($chunk as $product)
-
                                 <div class="col-lg-3">
-
                                     <div class="card h-100 shadow-sm">
-
                                         <div class="product-card-image-wrapper">
-
-                                            <span class="product-category-badge">
-                                                {{ $product->category->name }}
-                                            </span>
-
+                                            @if($product->promo_price)
+                                                <span class="product-category-badge">
+                                                    {{ round((($product->price - $product->promo_price) / $product->price) * 100) }}% OFF
+                                                </span>
+                                            @endif
                                             @if($product->img !== null && \Storage::exists($product->img))
                                                 <img
                                                     src="{{ \Storage::url($product->img) }}"
@@ -62,62 +51,41 @@
                                                     alt="Sin imagen"
                                                 >
                                             @endif
-
                                         </div>
 
                                         <div class="card-body d-flex flex-column">
-
                                             <h5 class="card-title">
                                                 {{ $product->title }}
                                             </h5>
-
                                             @if($product->promo_price)
-
                                                 <div class="product-prices">
-
                                                     <span class="product-old-price">
                                                         ${{ number_format($product->price, 0, ',', '.') }}
                                                     </span>
-
                                                     <span class="product-promo-price">
                                                         ${{ number_format($product->promo_price, 0, ',', '.') }}
                                                     </span>
-
                                                 </div>
-
                                             @else
-
                                                 <p class="product-normal-price">
                                                     ${{ number_format($product->price, 0, ',', '.') }}
                                                 </p>
-
                                             @endif
-
                                             <div class="mt-auto">
-
                                                 <a
                                                     href="{{ route('productos.show', ['id' => $product->id]) }}"
                                                     class="btn btn-primary w-100"
                                                 >
                                                     Ver producto
                                                 </a>
-
                                             </div>
-
                                         </div>
-
                                     </div>
-
                                 </div>
-
                             @endforeach
-
                         </div>
-
                     </div>
-
                 @endforeach
-
             </div>
 
             <button
@@ -128,7 +96,6 @@
             >
                 <span class="carousel-control-prev-icon"></span>
             </button>
-
             <button
                 class="carousel-control-next"
                 type="button"
@@ -137,7 +104,6 @@
             >
                 <span class="carousel-control-next-icon"></span>
             </button>
-
         </div>
 
         {{-- MOBILE: 2 productos por slide --}}
@@ -148,25 +114,16 @@
         >
 
             <div class="carousel-inner">
-
                 @foreach($products->chunk(2) as $index => $chunk)
-
                     <div class="carousel-item {{ $index === 0 ? 'active' : '' }}">
-
                         <div class="row g-3">
-
                             @foreach($chunk as $product)
-
                                 <div class="col-6">
-
                                     <div class="card h-100 shadow-sm">
-
                                         <div class="product-card-image-wrapper">
-
                                             <span class="product-category-badge">
                                                 {{ $product->category->name }}
                                             </span>
-
                                             @if($product->img !== null && \Storage::exists($product->img))
                                                 <img
                                                     src="{{ \Storage::url($product->img) }}"
@@ -180,62 +137,40 @@
                                                     alt="Sin imagen"
                                                 >
                                             @endif
-
                                         </div>
-
                                         <div class="card-body d-flex flex-column">
-
                                             <h6 class="card-title">
                                                 {{ $product->title }}
                                             </h6>
-
                                             @if($product->promo_price)
-
                                                 <div class="product-prices">
-
                                                     <span class="product-old-price">
                                                         ${{ number_format($product->price, 0, ',', '.') }}
                                                     </span>
-
                                                     <span class="product-promo-price">
                                                         ${{ number_format($product->promo_price, 0, ',', '.') }}
                                                     </span>
-
                                                 </div>
-
                                             @else
-
                                                 <p class="product-normal-price">
                                                     ${{ number_format($product->price, 0, ',', '.') }}
                                                 </p>
-
                                             @endif
-
                                             <div class="mt-auto">
-
                                                 <a
                                                     href="{{ route('productos.show', ['id' => $product->id]) }}"
                                                     class="btn btn-primary w-100"
                                                 >
                                                     Ver producto
                                                 </a>
-
                                             </div>
-
                                         </div>
-
                                     </div>
-
                                 </div>
-
                             @endforeach
-
                         </div>
-
                     </div>
-
                 @endforeach
-
             </div>
 
             <button
@@ -273,9 +208,9 @@
                 <div class="col-md-4">
                     <div class="card h-100 shadow-sm">
                         <div class="product-card-image-wrapper">
-                            <span class="product-category-badge">
+                        {{-- <span class="product-category-badge">
                                 {{ $blog->category_name }}
-                            </span>
+                            </span> --}}
 
                             @if($blog->img !== null && \Storage::exists($blog->img))
                                 <img
