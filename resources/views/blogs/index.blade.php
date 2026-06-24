@@ -5,8 +5,10 @@
 <x-main-layout>
     <x-slot:title>Blogs</x-slot>
 
-    <h1>VarWoods - Blogs</h1>
-    <p>Descubre las últimas noticias y artículos sobre muebles de madera.</p>
+    <div class="text-center mb-5">
+        <h1>VarWoods - Blogs</h1>
+        <h2>Descubre las últimas noticias y artículos sobre muebles de madera.</h2>
+    </div>
 
     @auth
         @if(auth()->user()->role === 'admin')
@@ -45,9 +47,9 @@
 
                     <div class="card-body d-flex flex-column">
 
-                        <h5 class="card-title">
+                        <h3 class="card-title">
                             {{ $blog->title }}
-                        </h5>
+                        </h3>
                         <p class="text-muted mb-2">
                             {{ $blog->fecha_publicacion }}
                         </p>

@@ -23,9 +23,9 @@
     </div>
 
     <div class="card-body d-flex flex-column">
-        <h5 class="card-title">
+        <h3 class="card-title">
             {{ $product->title }}
-        </h5>
+        </h3>
         @if($product->promo_price)
             <div class="product-prices">
                 <span class="product-old-price">

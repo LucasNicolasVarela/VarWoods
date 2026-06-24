@@ -6,11 +6,12 @@
 <x-main-layout>
     <x-slot:title>Inicio</x-slot>
 
-    <h1>VarWoods - Los mejores muebles</h1>
-
-    <p class="mb-5">
-        Bienvenido a VarWoods, tu destino número uno para muebles de madera de alta calidad.
-    </p>
+    <div class="text-center mb-5">
+        <h1>VarWoods - Los mejores muebles</h1>
+        <h2 class="mb-5">
+            ¡Bienvenido a VarWoods, tu destino número uno para muebles de madera de alta calidad!
+        </h2>
+    </div>
 
     <section class="mb-5">
         <div class="d-flex justify-content-between align-items-center mb-4">
@@ -54,9 +55,9 @@
                                         </div>
 
                                         <div class="card-body d-flex flex-column">
-                                            <h5 class="card-title">
+                                            <h3 class="card-title">
                                                 {{ $product->title }}
-                                            </h5>
+                                            </h3>
                                             @if($product->promo_price)
                                                 <div class="product-prices">
                                                     <span class="product-old-price">
@@ -229,9 +230,9 @@
 
                         <div class="card-body d-flex flex-column">
 
-                            <h5 class="card-title">
+                            <h3 class="card-title">
                                 {{ $blog->title }}
-                            </h5>
+                            </h3>
 
                             <p class="text-muted">
                                 {{ $blog->fecha_publicacion }}

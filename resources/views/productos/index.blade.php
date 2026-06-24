@@ -11,9 +11,11 @@
 
 <x-main-layout>
     <x-slot:title>Catálogo de Productos</x-slot>
-    <h1>Catálogo de Productos</h1>
-    <p>Explora nuestra amplia selección de productos de madera de alta calidad.</p>
 
+    <div class="text-center mb-5">
+        <h1>Catálogo de Productos</h1>
+        <h2>Explora nuestra amplia selección de productos de madera de alta calidad.</h2>
+    </div>
     @auth
         @if(auth()->user()->role === 'admin')
             <div class="mb-3">
